@@ -22,9 +22,9 @@ with pkgs; rec {
     pname = "serokell-core";
     version = "0.1.0.0";
     src = fetchgit {
-      url = "https://github.com/serokell/serokell-core";
-      sha256 = "1y7wx8yn122rxf1m8nq6qy90ky7yfw8mq30bcl8kfnvqi27f2h39";
-      rev = "7ca1ea6b4e426d35652fc4e2b89c3fa864d7ac8f";
+      url = "https://github.com/serokell/serokell-core.git";
+      sha256 = "0b8z4xqqpz2w0423wc2dwp11r7yvcz3n3gsk51m6a846l00kp2mr";
+      rev = "7e9cc7f44dccda2736735b24d84b5437899352d3";
     };
     libraryHaskellDepends = with hspkgs; [
       acid-state aeson aeson-extra base base16-bytestring
@@ -36,7 +36,7 @@ with pkgs; rec {
       time-units transformers unordered-containers vector yaml
     ];
     testHaskellDepends = with hspkgs; [
-      aeson base binary bytestring cereal data-msgpack hspec QuickCheck
+      aeson base binary bytestring cereal hspec msgpack QuickCheck
       quickcheck-instances safecopy scientific text text-format
       unordered-containers vector
     ];
@@ -68,34 +68,32 @@ with pkgs; rec {
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/serokell/time-warp";
-      sha256 = "09f1xmg27b44pqv64x3idmx1c5yx33lh0h8mr7k4y2kf0swd5lwd";
-      rev = "a011b70eeff425fd962173eef533500739ae6aa7";
+      sha256 = "12nj594avq80jlnj88n52pdcrsy5bcbn1v4f3bjb60543na40qdf";
+      rev = "86bb875da3eda203baea248aaced08286e535ae1";
     };
     isLibrary = true;
     isExecutable = true;
-    doCheck = false;
     libraryHaskellDepends = with hspkgs; [
-      ansi-terminal base binary binary-conduit bytestring conduit
-      conduit-extra containers data-default data-msgpack deepseq
-      exceptions formatting hslogger lens lifted-base monad-control
-      monad-loops MonadRandom mtl network pqueue QuickCheck
-      quickcheck-instances random safe semigroups serokell-core
-      slave-thread stm streaming-commons template-haskell text
-      text-format time time-units transformers transformers-base
+      ansi-terminal base bytestring containers data-default exceptions
+      formatting hslogger lens lifted-base monad-control monad-loops
+      MonadRandom msgpack msgpack-rpc mtl pqueue QuickCheck
+      quickcheck-instances random safe serokell-core stm template-haskell
+      text text-format time time-units transformers transformers-base
     ];
     executableHaskellDepends = with hspkgs; [
-      async base binary data-default data-msgpack exceptions formatting
-      hspec lens MonadRandom mtl QuickCheck random serokell-core stm text
-      text-format time-units transformers
+      async base data-default exceptions formatting hspec lens
+      MonadRandom msgpack msgpack-rpc mtl QuickCheck random serokell-core
+      stm text text-format time-units transformers
     ];
     testHaskellDepends = with hspkgs; [
-      async base data-default data-msgpack exceptions hspec lens mtl
-      QuickCheck random serokell-core stm text text-format time-units
+      async base data-default exceptions hspec lens msgpack msgpack-rpc
+      mtl QuickCheck random serokell-core stm text text-format time-units
       transformers
     ];
     homepage = "http://gitlab.serokell.io/serokell-team/time-warp";
     description = "distributed systems execution emulation";
     license = stdenv.lib.licenses.gpl3;
+
   };
 
   cryptonite-openssl = hspkgs.mkDerivation {
@@ -118,65 +116,14 @@ with pkgs; rec {
     license = stdenv.lib.licenses.bsd3;
   };
 
-#  msgpackGIT = pkgs.fetchgit {
-#    url = "https://github.com/serokell/msgpack-haskell.git";
-#    rev = "c84c868a37446ee0671b3c641a6155af142e6d78";
-#    sha256 = "17ikw3fp1mnq9lbw439sgc3msq5dpxhyan70g9iywy5vs11pdrm0";
-#  };
-#
-#  msgpack = hspkgs.mkDerivation {
-#    pname = "msgpack";
-#    version = "1.0.0";
-#    src = msgpackGIT;
-#    isLibrary = true;
-#    isExecutable = true;
-#    doCheck = false;
-#
-#    # HACK best workaround ever
-#    patchPhase = ''
-#      mv msgpack .msgpack
-#      rm -Rf *
-#      mv .msgpack/* .
-#    '';
-#
-#    libraryHaskellDepends = with hspkgs; [
-#      base mtl bytestring text containers unordered-containers hashable vector
-#      blaze-builder deepseq binary data-binary-ieee754
-#      semigroups
-#    ];
-#    license = pkgs.stdenv.lib.licenses.gpl3;
-#  };
-#
-#  msgpack-rpc = hspkgs.mkDerivation {
-#    pname = "msgpack-rpc";
-#    version = "1.0.0";
-#    src = msgpackGIT;
-#    isLibrary = true;
-#    isExecutable = true;
-#    doCheck = false;
-#
-#    # HACK best workaround ever
-#    patchPhase = ''
-#      mv msgpack-rpc .msgpack-rpc
-#      rm -Rf *
-#      mv .msgpack-rpc/* .
-#    '';
-#
-#    libraryHaskellDepends = with hspkgs; [
-#       msgpack base bytestring text network random mtl monad-control 
-#       conduit conduit-extra binary-conduit exceptions binary
-#    ];
-#
-#    license = pkgs.stdenv.lib.licenses.gpl3;
-#  };
 
   pvss-haskell = hspkgs.mkDerivation { 
     pname = "pvss";
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pvss-haskell";
-      sha256 = "0nzqj2ysj045ik8a2p4vnhldamlgxj2hriqcrx4rfr85qpxak6br";
-      rev = "996951c97f97d734ec7cea05e72620eaabfc72f3";
+      sha256 = "105ns64469vkzg120m1kfknrf9nygwqsh0kqfzgqrh67p4846fwi";
+      rev = "ec1f50c60feab9c7441f01aa94a006b40972acc6";
     };
     isLibrary = true;
     isExecutable = true;
@@ -221,25 +168,24 @@ with pkgs; rec {
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pos-haskell-prototype";
-      sha256 = "0qsbg6p36drj5n8j0nlff31k5xi6n8k425swmdhf5x7fya0g62ms";
-      rev = "4b1538c44345120898a75b6a10e575556a52f1ea";
+      sha256 = "137p18mhv3dkpjxfb1x5kjsmf1abpx5hrs3zclpwf1znspc97y9b";
+      rev = "b14d4a6200efd35b61bc638a324d651ff239e394";
     };
     isLibrary = true;
     isExecutable = true;
-    doCheck = true;
-    doHaddock = false;
     libraryHaskellDepends = with hspkgs; [
       acid-state async base binary binary-orphans bytestring cereal
       containers cryptonite data-default data-msgpack derive ed25519
-      exceptions formatting hashable HsOpenSSL kademlia lens lrucache
-      memory mtl parsec pvss QuickCheck quickcheck-instances random
-      safecopy serokell-core stm template-haskell text text-format time
-      time-warp transformers universum unordered-containers vector
+      exceptions formatting hashable HsOpenSSL kademlia lens list-t
+      lrucache memory mtl parsec pvss QuickCheck quickcheck-instances
+      random safecopy serokell-core stm stm-containers template-haskell
+      text text-format time time-warp transformers universum
+      unordered-containers vector
     ];
     executableHaskellDepends = with hspkgs; [
-      async base binary bytestring data-default directory filepath
-      formatting optparse-applicative optparse-simple parsec
-      serokell-core time-warp universum
+      base binary bytestring data-default directory filepath formatting
+      optparse-applicative optparse-simple parsec serokell-core time-warp
+      universum
     ];
     testHaskellDepends = with hspkgs; [
       base binary bytestring cryptonite formatting hspec memory
@@ -250,7 +196,7 @@ with pkgs; rec {
     license = stdenv.lib.licenses.bsd3;
   };
   
-  hspkgs = pkgs.haskell.packages.ghc801.override {
+  hspkgs = pkgs.haskell.packages.ghc7103.override {
     overrides = self: super: {
       inherit serokell-core;
       inherit acid-state;
@@ -259,8 +205,6 @@ with pkgs; rec {
       inherit kademlia; 
       inherit cardano;
       inherit cryptonite-openssl;
-#      inherit msgpack;
-#      inherit msgpack-rpc;
       pvss = pvss-haskell;
     };
   };

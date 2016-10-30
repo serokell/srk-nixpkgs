@@ -1,4 +1,4 @@
-{ pkgs } :
+{ pkgs, compiler ? pkgs.haskell.packages.ghc801 } :
 
 with pkgs; rec {
   universum = hspkgs.mkDerivation {
@@ -22,9 +22,9 @@ with pkgs; rec {
     pname = "serokell-core";
     version = "0.1.0.0";
     src = fetchgit {
-      url = "https://github.com/serokell/serokell-core.git";
-      sha256 = "0b8z4xqqpz2w0423wc2dwp11r7yvcz3n3gsk51m6a846l00kp2mr";
-      rev = "7e9cc7f44dccda2736735b24d84b5437899352d3";
+      url = "https://github.com/serokell/serokell-core";
+      sha256 = "1y7wx8yn122rxf1m8nq6qy90ky7yfw8mq30bcl8kfnvqi27f2h39";
+      rev = "7ca1ea6b4e426d35652fc4e2b89c3fa864d7ac8f";
     };
     libraryHaskellDepends = with hspkgs; [
       acid-state aeson aeson-extra base base16-bytestring
@@ -36,7 +36,7 @@ with pkgs; rec {
       time-units transformers unordered-containers vector yaml
     ];
     testHaskellDepends = with hspkgs; [
-      aeson base binary bytestring cereal hspec msgpack QuickCheck
+      aeson base binary bytestring cereal data-msgpack hspec QuickCheck
       quickcheck-instances safecopy scientific text text-format
       unordered-containers vector
     ];
@@ -196,7 +196,7 @@ with pkgs; rec {
     license = stdenv.lib.licenses.bsd3;
   };
   
-  hspkgs = pkgs.haskell.packages.ghc7103.override {
+  hspkgs = compiler.override {
     overrides = self: super: {
       inherit serokell-core;
       inherit acid-state;

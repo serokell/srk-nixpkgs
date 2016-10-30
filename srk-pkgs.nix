@@ -67,33 +67,35 @@ with pkgs; rec {
     pname = "time-warp";
     version = "0.1.0.0";
     src = fetchgit {
-      url = "https://github.com/serokell/time-warp";
-      sha256 = "12nj594avq80jlnj88n52pdcrsy5bcbn1v4f3bjb60543na40qdf";
-      rev = "86bb875da3eda203baea248aaced08286e535ae1";
+      url = "http://github.com/serokell/time-warp";
+      sha256 = "0l0vach9cxaw9zavidsm1x3x7bbqhd32cyj4f5k1q6895k3k1hma";
+      rev = "1a340182716be4169c05f08649c8fe7d775785af";
     };
     isLibrary = true;
     isExecutable = true;
+    doCheck = false;
     libraryHaskellDepends = with hspkgs; [
-      ansi-terminal base bytestring containers data-default exceptions
-      formatting hslogger lens lifted-base monad-control monad-loops
-      MonadRandom msgpack msgpack-rpc mtl pqueue QuickCheck
-      quickcheck-instances random safe serokell-core stm template-haskell
-      text text-format time time-units transformers transformers-base
+      ansi-terminal base binary binary-conduit bytestring conduit
+      conduit-extra containers data-default data-msgpack deepseq
+      exceptions formatting hslogger lens lifted-base monad-control
+      monad-loops MonadRandom mtl network pqueue QuickCheck
+      quickcheck-instances random safe semigroups serokell-core
+      slave-thread stm streaming-commons template-haskell text
+      text-format time time-units transformers transformers-base
     ];
     executableHaskellDepends = with hspkgs; [
-      async base data-default exceptions formatting hspec lens
-      MonadRandom msgpack msgpack-rpc mtl QuickCheck random serokell-core
-      stm text text-format time-units transformers
+      async base binary data-default data-msgpack exceptions formatting
+      hspec lens MonadRandom mtl QuickCheck random serokell-core stm text
+      text-format time-units transformers
     ];
     testHaskellDepends = with hspkgs; [
-      async base data-default exceptions hspec lens msgpack msgpack-rpc
-      mtl QuickCheck random serokell-core stm text text-format time-units
+      async base data-default data-msgpack exceptions hspec lens mtl
+      QuickCheck random serokell-core stm text text-format time-units
       transformers
     ];
     homepage = "http://gitlab.serokell.io/serokell-team/time-warp";
     description = "distributed systems execution emulation";
     license = stdenv.lib.licenses.gpl3;
-
   };
 
   cryptonite-openssl = hspkgs.mkDerivation {
@@ -173,6 +175,8 @@ with pkgs; rec {
     };
     isLibrary = true;
     isExecutable = true;
+    doCheck = false;
+    doHaddock = false;
     libraryHaskellDepends = with hspkgs; [
       acid-state async base binary binary-orphans bytestring cereal
       containers cryptonite data-default data-msgpack derive ed25519

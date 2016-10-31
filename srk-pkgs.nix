@@ -6,12 +6,12 @@ with pkgs; rec {
     version = "0.1.8";
     src = fetchgit {
       url = "https://github.com/serokell/universum.git";
-      sha256 = "0rg8m41r32a0g0izirj2kmc0c4nry98nsbqdpbr5s7mz13qnh10h";
-      rev = "0d50a67184025479df08b207f41710e2e2478e65";
+      sha256 = "1pq4n4zmmyx356flma9cz56769vjiw5dcpkpl6nkkc6wpsb0gqfw";
+      rev = "25623d197c5b6c9ff17e3b955714c65c0da5631b";
     };
     libraryHaskellDepends = with hspkgs; [
       async base bytestring containers deepseq exceptions ghc-prim mtl
-      safe stm text text-format transformers unordered-containers
+      safe stm text text-format transformers unordered-containers utf8-string
     ];
     homepage = "https://github.com/serokell/universum";
     description = "A sensible set of defaults for writing custom Preludes";
@@ -68,19 +68,21 @@ with pkgs; rec {
     version = "0.1.0.0";
     src = fetchgit {
       url = "http://github.com/serokell/time-warp";
-      sha256 = "0l0vach9cxaw9zavidsm1x3x7bbqhd32cyj4f5k1q6895k3k1hma";
-      rev = "1a340182716be4169c05f08649c8fe7d775785af";
+      sha256 = "0xllwga6sg4q0is83n7qhqqv9x2dqzi8775h9mfmnd6p79vzfnan";
+      rev = "15dd68d293db5f0d14e7d78d6cd9ac1f5a526afa";
     };
     isLibrary = true;
     isExecutable = true;
     doCheck = false;
+    doHaddock = false;
     libraryHaskellDepends = with hspkgs; [
       ansi-terminal base binary binary-conduit bytestring conduit
       conduit-extra containers data-default data-msgpack deepseq
       exceptions formatting hslogger lens lifted-base monad-control
       monad-loops MonadRandom mtl network pqueue QuickCheck
       quickcheck-instances random safe semigroups serokell-core
-      slave-thread stm streaming-commons template-haskell text
+      slave-thread stm stm-chans stm-conduit 
+      streaming-commons template-haskell text
       text-format time time-units transformers transformers-base
     ];
     executableHaskellDepends = with hspkgs; [
@@ -170,8 +172,8 @@ with pkgs; rec {
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pos-haskell-prototype";
-      sha256 = "137p18mhv3dkpjxfb1x5kjsmf1abpx5hrs3zclpwf1znspc97y9b";
-      rev = "b14d4a6200efd35b61bc638a324d651ff239e394";
+      sha256 = "1i51g9d0c3817b21vbxfiv8jyygwasbfx628539cwardxlrz1wxr";
+      rev = "918567e796e0ca0e26648fcb67c55575ef436b73";
     };
     isLibrary = true;
     isExecutable = true;

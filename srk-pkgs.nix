@@ -68,8 +68,8 @@ with pkgs; rec {
     version = "0.1.0.0";
     src = fetchgit {
       url = "http://github.com/serokell/time-warp";
-      sha256 = "00s2dz14zigsrxnw3v5byl3412wfl7bfqcar5881aiy9n0yb4w99";
-      rev = "105a621e4c5a37f72e3dd4d4c6cd999366ae1bed";
+      sha256 = "0gz7vyz65ab9invbs6n1d5izxkh7l08ywrh9v8ik79sa1rqc64kv";
+      rev = "6645c7c99b70b8230a02a102c1ce10701f721f76";
     };
     isLibrary = true;
     isExecutable = true;
@@ -180,8 +180,8 @@ with pkgs; rec {
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pos-haskell-prototype";
-      sha256 = "0kmsbmr89vlxzv6k7i397g24adj11k4704r2gy0fr6f9qcz8bvwf";
-      rev = "7edc0a31aa7443a3fccf8bc64901821636157c1f";
+      sha256 = "0v41g77r1phr639zpy5hrz7xfc1xv6pdqwdmb7dsl1nw97ba8vsw";
+      rev = "b32b0a8312f281b45d024efdbc96006be69b468f";
     };
     isLibrary = true;
     isExecutable = true;

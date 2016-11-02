@@ -172,6 +172,7 @@ with pkgs; rec {
     slotDurationSec: 20
     networkDiameter: 6
     neighboursSendThreshold: 4
+    genesisN: 150
   '';
 
   cardano = hspkgs.mkDerivation {
@@ -179,8 +180,8 @@ with pkgs; rec {
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pos-haskell-prototype";
-      sha256 = "1278zqz59ppdlgl72qx3632409ayrg949ahsd29wnvhfrj24kl6d";
-      rev = "1a22a310d68edd8bd626ef33f62e3170ca155e97";
+      sha256 = "0bjqd9s9zad7l915crvqdpq588s4imjf0jg7vm90nckrm8nd49ir";
+      rev = "c5f81d7fb22f40710be80838f4b8a9bd57f38fa7";
     };
     isLibrary = true;
     isExecutable = true;

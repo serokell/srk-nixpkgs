@@ -167,15 +167,15 @@ with pkgs; rec {
     license = stdenv.lib.licenses.bsd3;
   };
 
-  cardanoProdCompileConfig = ''
+  defaultCardanoConfig = genesisN: ''
     k: 3
     slotDurationSec: 20
     networkDiameter: 6
     neighboursSendThreshold: 4
-    genesisN: 150
+    genesisN: ${toString genesisN}
   '';
 
-  cardano = hspkgs.mkDerivation {
+  cardano = {genesisN ? 5}: hspkgs.mkDerivation {
     pname = "pos";
     version = "0.1.0.0";
     src = fetchgit {
@@ -188,7 +188,7 @@ with pkgs; rec {
     doCheck = false;
     doHaddock = false;
     patchPhase = ''
-     echo "${cardanoProdCompileConfig}" > constants.yaml
+     echo "${defaultCardanoConfig genesisN}" > constants.yaml
     '';
     libraryHaskellDepends = with hspkgs; [
       acid-state aeson async base binary binary-orphans bytestring cereal

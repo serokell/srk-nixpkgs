@@ -68,8 +68,8 @@ with pkgs; rec {
     version = "0.1.0.0";
     src = fetchgit {
       url = "http://github.com/serokell/time-warp";
-      sha256 = "1a8zj1g9ncvic8baqxqlsgxgvf612l9wqnp05did8lcl44dhfvx8";
-      rev = "67a47df16236a6403b017ca5501fb9b24d7a7286";
+      sha256 = "0hbnq3vabqriwkqgl2833pnn346vf2dgwcmrwb90kyz1pa8pxcqs";
+      rev = "23862a33fb852aac8c0ed1c32156a1b256035691";
     };
     isLibrary = true;
     isExecutable = true;
@@ -172,8 +172,8 @@ with pkgs; rec {
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pos-haskell-prototype";
-      sha256 = "04bqhg8wp4yfpmsh7qr08ws59caqpvh4289lrn059jrnmbavgdrm";
-      rev = "f45c2ae5ff9f13e8ad7c8dc4ebb449b6b8c9590a";
+      sha256 = "0g4jfkydi3mcnc4a7n30mba7l2gjsmrc4a6p3iw03gwb2i0j5qqd";
+      rev = "befd79a3e637e4db6d688bafd31ca78a011c9087";
     };
     isLibrary = true;
     isExecutable = true;
@@ -186,7 +186,7 @@ with pkgs; rec {
       lrucache memory mtl parsec pvss QuickCheck quickcheck-instances
       random safecopy serokell-core stm stm-containers template-haskell
       text text-format time time-warp transformers universum
-      unordered-containers vector
+      unordered-containers UtilityTM vector
     ];
     executableHaskellDepends = with hspkgs; [
       base binary bytestring data-default directory filepath formatting

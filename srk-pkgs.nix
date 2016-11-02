@@ -126,8 +126,8 @@ with pkgs; rec {
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pvss-haskell";
-      sha256 = "105ns64469vkzg120m1kfknrf9nygwqsh0kqfzgqrh67p4846fwi";
-      rev = "ec1f50c60feab9c7441f01aa94a006b40972acc6";
+      sha256 = "0svfvw459dwnpin3vvn1ys007zpg3vgss473c3jbzfilc57zl1cc";
+      rev = "1b898a222341116d210f2d3a5566028e14a335ae";
     };
     isLibrary = true;
     isExecutable = true;

@@ -149,8 +149,8 @@ with pkgs; rec {
     version = "1.1.0.0";
     src = fetchgit {
       url = "https://github.com/serokell/kademlia";
-      sha256 = "0p0ww5qq5bxfrrhrx3pi5pg62m5nz0am5jqr19gbz78vdc06zk6w";
-      rev = "d3d6d62fc248156320ec92c730a38f483500edd5";
+      sha256 = "10y7qfxwc0zi3v3p4jcqfdkg5z9l8fy8vxv06h60b8n3di649r4s";
+      rev = "062053ed11b92c8e25d4d61ea943506fd0482fa6";
     };
 
     doCheck = false;

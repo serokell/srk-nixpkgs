@@ -180,15 +180,15 @@ with pkgs; rec {
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pos-haskell-prototype";
-      sha256 = "06sm3f429yz6b99r11nnl1shcki9vdyr0vaigxfll6afg3nyqcnn";
-      rev = "87334c2b746be348f3f44bd4d521f0b5c3a556f0";
+      sha256 = "1sx4i8044qlmd6xx8nw4i8f8cvmyizkgav4qknj6py9w73qiann1";
+      rev = "dff13e90ce0ef3d9b635b2f4e827325eee0f9e70";
     };
     isLibrary = true;
     isExecutable = true;
     doCheck = false;
     doHaddock = false;
     patchPhase = ''
-     echo "${defaultCardanoConfig 5}" > constants.yaml
+     echo "${defaultCardanoConfig 3}" > constants.yaml
     '';
     libraryHaskellDepends = with hspkgs; [
       acid-state aeson async base binary binary-orphans bytestring cereal

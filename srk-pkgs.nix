@@ -68,8 +68,8 @@ with pkgs; rec {
     version = "0.1.0.0";
     src = fetchgit {
       url = "http://github.com/serokell/time-warp";
-      sha256 = "1z0i3lfhgjjlhjs149axiggzkflb5hag3qsqmhcvmi3b2z1ij37b";
-      rev = "5a921ce0dd87a436791fda82f3d34464747a51b2";
+      sha256 = "00s2dz14zigsrxnw3v5byl3412wfl7bfqcar5881aiy9n0yb4w99";
+      rev = "105a621e4c5a37f72e3dd4d4c6cd999366ae1bed";
     };
     isLibrary = true;
     isExecutable = true;

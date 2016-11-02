@@ -167,26 +167,36 @@ with pkgs; rec {
     license = stdenv.lib.licenses.bsd3;
   };
 
+  cardanoProdCompileConfig = ''
+    k: 3
+    slotDurationSec: 20
+    networkDiameter: 6
+    neighboursSendThreshold: 4
+  '';
+
   cardano = hspkgs.mkDerivation {
     pname = "pos";
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pos-haskell-prototype";
-      sha256 = "1v4zs4dmfmcvp249h9gqd93kkw0qpap70xnp7r356l01ipjchrwl";
-      rev = "434947d9ba833b965600f940d3093512d3cba2fd";
+      sha256 = "1xzv0ibsddpya7hgk9if7q1gkhrkm40kfmc4gprzk3gavbrizw22";
+      rev = "c4f3b6d82b50ec69f292f8efafebac8288823e46";
     };
     isLibrary = true;
     isExecutable = true;
     doCheck = false;
     doHaddock = false;
+    patchPhase = ''
+     echo "${cardanoProdCompileConfig}" > constants.yaml
+    '';
     libraryHaskellDepends = with hspkgs; [
-      acid-state async base binary binary-orphans bytestring cereal
+      acid-state aeson async base binary binary-orphans bytestring cereal
       containers cryptonite data-default data-msgpack derive ed25519
-      exceptions formatting hashable HsOpenSSL kademlia lens list-t
+      exceptions file-embed formatting hashable HsOpenSSL kademlia lens list-t
       lrucache memory mtl parsec pvss QuickCheck quickcheck-instances
       random safecopy serokell-core stm stm-containers template-haskell
       text text-format time time-warp transformers universum
-      unordered-containers UtilityTM vector
+      unordered-containers UtilityTM vector yaml
     ];
     executableHaskellDepends = with hspkgs; [
       base binary bytestring data-default directory filepath formatting

@@ -26,14 +26,15 @@ in
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pos-haskell-prototype";
-      sha256 = "0f7ymz2hkchc0l62b03z4128k7w7m24885l5y78q8iac7d71ajlr";
-      rev = "6221a80026e1cabfe90b8a10994df0486d84ceac";
+      sha256 = "1f4kjbh2yixxy406xl7zscb2i6d6fk68pzawrarvcbpd41x12yq8";
+      rev = "369a2b95615e91e9810670df2dc1a7bfb64e3e9a";
     };
     isLibrary = true;
     isExecutable = true;
     patchPhase = ''
      echo "${defaultCardanoConfig}" > constants.yaml
     '';
+    doHaddock = false;
     libraryHaskellDepends = [
       acid-state aeson ansi-terminal async base binary binary-orphans
       bytestring cereal containers cryptonite data-default data-msgpack

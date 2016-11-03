@@ -4,11 +4,11 @@
 }:
 mkDerivation {
   pname = "universum";
-  version = "0.1.8";
+  version = "0.1.9";
   src = fetchgit {
     url = "https://github.com/serokell/universum";
-    sha256 = "17bsvn9jg0ans2168cwkr73vb4ikc3g9n5kjppkrjd9svw6zpjnb";
-    rev = "a91badb3b306fb6816dbe761a7148895bc8cf789";
+    sha256 = "03bvrfc6av73rzp5nw5jy048f210vwra5a63477vqlvxd8s398bz";
+    rev = "8e33495fd58c5443e0c2b0f1b6646516a47bd8d6";
   };
   libraryHaskellDepends = [
     async base bytestring containers deepseq exceptions ghc-prim mtl

@@ -6,12 +6,11 @@ mkDerivation {
   version = "0.2";
   src = fetchgit {
     url = "https://github.com/haskell-crypto/cryptonite-openssl";
-    sha256 = "0gkx0hhi77lp02r5bszw7li0qdkz9dzgk48ba5f0099jzqyn79hi";
-    rev = "34f17904e658099ac139b35c7a247863f6fdf9f1";
+    sha256 = "1s129bpvbvr6wybfn47fzbxpkrj33gqn6azs41ff0j7pirpd3xv8";
+    rev = "bf8ffeb9534538f71a5430bc5b9e9ba00e72683f";
   };
   libraryHaskellDepends = [ base bytestring memory ];
   librarySystemDepends = [ openssl ];
-  doCheck = false;
   testHaskellDepends = [
     base bytestring cryptonite tasty tasty-hunit tasty-kat
     tasty-quickcheck

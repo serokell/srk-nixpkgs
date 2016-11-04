@@ -9,12 +9,12 @@
 , vector, yaml
 }:
 mkDerivation {
-  pname = "serokell-core";
-  version = "0.1.0.0";
+  pname = "serokell-util";
+  version = "0.1.1";
   src = fetchgit {
-    url = "https://github.com/serokell/serokell-core";
-    sha256 = "1y7wx8yn122rxf1m8nq6qy90ky7yfw8mq30bcl8kfnvqi27f2h39";
-    rev = "7ca1ea6b4e426d35652fc4e2b89c3fa864d7ac8f";
+    url = "https://github.com/serokell/serokell-util";
+    sha256 = "0vb9v6qpcwbly3lr7vbal200q77cjzxlnnnwgnc6y6msbxkpn6qr";
+    rev = "3fd9a911211276f1f2a2a9fe78bddbb2e1ffd503";
   };
   libraryHaskellDepends = [
     acid-state aeson aeson-extra base base16-bytestring
@@ -30,7 +30,7 @@ mkDerivation {
     quickcheck-instances safecopy scientific text text-format
     unordered-containers vector
   ];
-  homepage = "http://gitlab.serokell.io/serokell-team/serokell-core";
+  homepage = "http://gitlab.serokell.io/serokell-team/serokell-util";
   description = "General-purpose functions by Serokell";
   license = stdenv.lib.licenses.mit;
 }

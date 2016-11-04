@@ -3,7 +3,7 @@
 with pkgs; rec {
 
   universum = hspkgs.callPackage ./universum.nix { };
-  serokell-core = hspkgs.callPackage ./serokell-core.nix { };
+  serokell-util = hspkgs.callPackage ./serokell-util.nix { };
   acid-state = hspkgs.callPackage ./acid-state.nix { };
   time-warp = hspkgs.callPackage ./time-warp.nix { };
   cryptonite-openssl = hspkgs.callPackage ./cryptonite-openssl.nix { };
@@ -14,7 +14,7 @@ with pkgs; rec {
   hspkgs = compiler.override {
     overrides = self: super: {
       inherit universum;
-      inherit serokell-core;
+      inherit serokell-util;
       inherit acid-state;
       inherit time-warp;
       inherit cryptonite-openssl;

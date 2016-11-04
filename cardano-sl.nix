@@ -9,7 +9,7 @@
 , template-haskell, text, text-format, time, time-units, time-warp
 , transformers, transformers-base, universum, unordered-containers
 , UtilityTM, vector, yaml
-, genesisN ? 3
+, genesisN 
 }:
 
 let 

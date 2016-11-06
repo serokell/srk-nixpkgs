@@ -9,7 +9,7 @@ mkDerivation {
   src = fetchgit {
     url = "https://github.com/serokell/acid-state";
     sha256 = "1d9wig3ziwz2rm4j3yqp3kajim1dxxlp7b16vz1r9cyz6k5hds0n";
-    rev = "dea606c78d9ecd22247e3c90dcf12c6b4b0458fc";
+    rev = "405e41b671d3ffb17a837b45e7d01a2b635c1061";
   };
   libraryHaskellDepends = [
     array base bytestring cereal containers directory

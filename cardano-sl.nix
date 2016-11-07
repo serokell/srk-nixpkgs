@@ -8,7 +8,7 @@
 , random, safecopy, serokell-util, stdenv, stm, stm-containers
 , template-haskell, text, text-format, time, time-units, time-warp
 , transformers, transformers-base, universum, unordered-containers
-, UtilityTM, vector, yaml
+, UtilityTM, vector, yaml, Chart, Chart-diagrams, turtle
 , genesisN 
 }:
 
@@ -26,8 +26,8 @@ in
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pos-haskell-prototype";
-      sha256 = "0ydzhf6av25s6a9x34ldxq3y2hg3377v2dm44nlr62574jzh1k83";
-      rev = "ba0e4f66097eb2de4dd72ae0cab4753e919fcddd";
+      sha256 = "02xfmd023rywyya53byq08jzd7vh1kf7rpi8sbg8bgqrxcf8sh1d";
+      rev = "007e245d721a646e11746ed5c48a7c55575b522b";
     };
     isLibrary = true;
     isExecutable = true;
@@ -49,7 +49,7 @@ in
     executableHaskellDepends = [
       base binary bytestring data-default directory filepath formatting
       optparse-applicative optparse-simple parsec serokell-util time-warp
-      universum
+      universum Chart Chart-diagrams turtle
     ];
     testHaskellDepends = [
       base binary bytestring cereal cryptonite data-msgpack formatting

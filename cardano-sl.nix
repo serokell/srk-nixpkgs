@@ -9,13 +9,13 @@
 , template-haskell, text, text-format, time, time-units, time-warp
 , transformers, transformers-base, universum, unordered-containers
 , UtilityTM, vector, yaml, Chart, Chart-diagrams, turtle
-, genesisN 
+, genesisN, slotDuration
 }:
 
 let 
   defaultCardanoConfig = ''
-    k: 3
-    slotDurationSec: 20
+    k: 6
+    slotDurationSec: ${toString slotDuration}
     networkDiameter: 6
     neighboursSendThreshold: 4
     genesisN: ${toString genesisN}
@@ -26,8 +26,8 @@ in
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pos-haskell-prototype";
-      sha256 = "02xfmd023rywyya53byq08jzd7vh1kf7rpi8sbg8bgqrxcf8sh1d";
-      rev = "007e245d721a646e11746ed5c48a7c55575b522b";
+      sha256 = "1mffyzzjl47hx7m5gaggd9askxsl535fngg7bcd869d2y14zfp43";
+      rev = "a64150b5b1c36656b2347921375da7b3b04bb8cd";
     };
     isLibrary = true;
     isExecutable = true;

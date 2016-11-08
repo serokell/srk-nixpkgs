@@ -19,6 +19,7 @@ let
     networkDiameter: 6
     neighboursSendThreshold: 4
     genesisN: ${toString genesisN}
+    maxLocalTxs: 10000
   '';
 in
   mkDerivation {

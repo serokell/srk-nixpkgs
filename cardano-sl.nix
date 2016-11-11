@@ -9,17 +9,18 @@
 , template-haskell, text, text-format, time, time-units, time-warp
 , transformers, transformers-base, universum, unordered-containers
 , UtilityTM, vector, yaml, Chart, Chart-diagrams, turtle
-, genesisN, slotDuration
+, genesisN, slotDuration, networkDiameter, mpcRelayInterval
 }:
 
 let 
   defaultCardanoConfig = ''
     k: 6
     slotDurationSec: ${toString slotDuration}
-    networkDiameter: 6
+    networkDiameter: ${toString networkDiameter}
     neighboursSendThreshold: 4
     genesisN: ${toString genesisN}
     maxLocalTxs: 10000
+    mpcRelayInterval: ${toString mpcRelayInterval}
   '';
 in
   mkDerivation {
@@ -27,8 +28,8 @@ in
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pos-haskell-prototype";
-      sha256 = "19fyc8bbn6gmg7npv8ghx24w71aby7clhay6k39ygqi5nr0b6a2s";
-      rev = "59471195c567ca47b1a157aa77b6c5128302191f";
+      sha256 = "0d0jnbibqdafij85kyvli7gbqdh4jwxxai872dycqb2n3wab1gyd";
+      rev = "f14e8d6ed492ed7dd07daef977efa7cade8baff2";
     };
     isLibrary = true;
     isExecutable = true;

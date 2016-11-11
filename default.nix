@@ -1,7 +1,9 @@
 { pkgs
 , compiler ? pkgs.haskell.packages.ghc801
 , genesisN ? 3 
-, slotDuration ? 20 } :
+, slotDuration ? 20 
+, networkDiameter ? 6
+, mpcRelayInterval ? 16 } :
 
 with pkgs; rec {
 
@@ -12,7 +14,7 @@ with pkgs; rec {
   cryptonite-openssl = hspkgs.callPackage ./cryptonite-openssl.nix { };
   pvss = hspkgs.callPackage ./pvss.nix { };
   kademlia = hspkgs.callPackage ./kademlia.nix { };
-  cardano-sl = hspkgs.callPackage ./cardano-sl.nix { inherit genesisN slotDuration; };
+  cardano-sl = hspkgs.callPackage ./cardano-sl.nix { inherit genesisN slotDuration networkDiameter mpcRelayInterval; };
   
   hspkgs = compiler.override {
     overrides = self: super: {

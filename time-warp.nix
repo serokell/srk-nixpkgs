@@ -1,33 +1,34 @@
-{ mkDerivation, ansi-terminal, async, base, binary, binary-conduit
+{ mkDerivation, aeson, ansi-terminal, async, base, binary, binary-conduit
 , bytestring, conduit, conduit-extra, containers, data-default
-, data-msgpack, deepseq, exceptions, fetchgit, formatting, hslogger
+, data-msgpack, deepseq, errors, extra, exceptions, fetchgit, formatting, hashable, hslogger
 , hspec, lens, lifted-base, mmorph, monad-control, monad-loops
 , MonadRandom, mtl, network, pqueue, QuickCheck
 , quickcheck-instances, random, safe, semigroups, serokell-util
 , slave-thread, stdenv, stm, stm-chans, stm-conduit
 , streaming-commons, template-haskell, text, text-format, time
-, time-units, transformers, transformers-base
+, time-units, transformers, transformers-base, unordered-containers, yaml
 }:
 mkDerivation {
   pname = "time-warp";
-  version = "0.1.0.0";
+  version = "0.1.1.0";
   src = fetchgit {
     url = "https://github.com/serokell/time-warp/";
-    sha256 = "1k0qhdri18zhaqa46nqkml5fq1yxcvcv076icr0a0nr50ihnp5gb";               
-    rev = "47a91c82f0875e91bbed1fa1ea18c1df968841f5";
+    sha256 = "0b9kqa6iaxqlki8p3a7l56s2z18ac0ix7pjnh1haw0cidncgahvz";               
+    rev = "157ae0135c82ceb2fd882ad3729af147b93ae492";
   };
 
   isLibrary = true;
   isExecutable = true;
   libraryHaskellDepends = [
-    ansi-terminal base binary binary-conduit bytestring conduit
+    aeson ansi-terminal base binary binary-conduit bytestring conduit
     conduit-extra containers data-default data-msgpack deepseq
-    exceptions formatting hslogger lens lifted-base mmorph
+    exceptions extra errors
+    formatting hashable hslogger lens lifted-base mmorph
     monad-control monad-loops MonadRandom mtl network pqueue QuickCheck
     quickcheck-instances random safe semigroups serokell-util
     slave-thread stm stm-chans stm-conduit streaming-commons
     template-haskell text text-format time time-units transformers
-    transformers-base
+    transformers-base unordered-containers yaml
   ];
   executableHaskellDepends = [
     async base binary binary-conduit conduit data-default data-msgpack

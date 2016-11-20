@@ -2,7 +2,7 @@
 , binary, binary-orphans, bytestring, cereal, containers
 , cryptonite, data-default, data-msgpack, derive, directory
 , ed25519, exceptions, fetchgit, file-embed, filepath, formatting
-, hashable, HsOpenSSL, hspec, kademlia, lens, lifted-async
+, hashable, HsOpenSSL, hspec, kademlia, lens, lifted-async, log-warper
 , lrucache, memory, monad-control, mtl, optparse-applicative
 , optparse-simple, parsec, pvss, QuickCheck, quickcheck-instances
 , random, safecopy, serokell-util, stdenv, stm, stm-containers
@@ -21,6 +21,9 @@ let
     genesisN: ${toString genesisN}
     maxLocalTxs: 10000
     mpcRelayInterval: ${toString mpcRelayInterval}
+    defaultPeers: []
+    sysTimeBroadcastSlots: 6
+    mpcSendInterval: 18 # must be less than (k * slotDuration - networkDiameter)
   '';
 in
   mkDerivation {
@@ -28,8 +31,8 @@ in
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pos-haskell-prototype";
-      sha256 = "0d0jnbibqdafij85kyvli7gbqdh4jwxxai872dycqb2n3wab1gyd";
-      rev = "f14e8d6ed492ed7dd07daef977efa7cade8baff2";
+      sha256 = "0rhwz1ks8zjvyw6s8i9php7nsk8k94d3qiz6p58s2jv87p07afpi";
+      rev = "b7adf2f2b2b1ef3238bc990ea263bdb3f3b55b86";
     };
     isLibrary = true;
     isExecutable = true;
@@ -42,20 +45,20 @@ in
       acid-state aeson ansi-terminal async base binary binary-orphans
       bytestring cereal containers cryptonite data-default data-msgpack
       derive ed25519 exceptions file-embed formatting hashable HsOpenSSL
-      kademlia lens lifted-async lrucache memory monad-control mtl parsec
+      kademlia lens lifted-async log-warper lrucache memory monad-control mtl parsec
       pvss QuickCheck quickcheck-instances random safecopy serokell-util
       stm stm-containers template-haskell text text-format time
       time-units time-warp transformers transformers-base universum
       unordered-containers UtilityTM vector yaml
     ];
     executableHaskellDepends = [
-      base binary bytestring data-default directory filepath formatting
+      base binary bytestring data-default directory filepath formatting log-warper
       optparse-applicative optparse-simple parsec serokell-util time-warp
       universum Chart Chart-diagrams turtle
     ];
     testHaskellDepends = [
       base binary bytestring cereal cryptonite data-msgpack formatting
-      hspec memory QuickCheck random safecopy serokell-util time-units
+      hspec log-warper memory QuickCheck random safecopy serokell-util time-units
       time-warp universum unordered-containers
     ];
     description = "Cardano SL main implementation";

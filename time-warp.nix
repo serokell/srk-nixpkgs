@@ -1,20 +1,20 @@
 { mkDerivation, aeson, ansi-terminal, async, base, binary, binary-conduit
 , bytestring, conduit, conduit-extra, containers, data-default
 , data-msgpack, deepseq, errors, extra, exceptions, fetchgit, formatting, hashable, hslogger
-, hspec, lens, lifted-base, mmorph, monad-control, monad-loops
-, MonadRandom, mtl, network, pqueue, QuickCheck
-, quickcheck-instances, random, safe, semigroups, serokell-util
+, hspec, lens, lifted-base, log-warper, mmorph, monad-control, monad-loops
+, MonadRandom, mtl, network, optparse-simple, pqueue, QuickCheck
+, quickcheck-instances, random, regex-tdfa, safe, semigroups, serokell-util
 , slave-thread, stdenv, stm, stm-chans, stm-conduit
 , streaming-commons, template-haskell, text, text-format, time
 , time-units, transformers, transformers-base, unordered-containers, yaml
 }:
 mkDerivation {
   pname = "time-warp";
-  version = "0.1.1.0";
+  version = "1.1.0.1";
   src = fetchgit {
     url = "https://github.com/serokell/time-warp/";
-    sha256 = "0b9kqa6iaxqlki8p3a7l56s2z18ac0ix7pjnh1haw0cidncgahvz";               
-    rev = "157ae0135c82ceb2fd882ad3729af147b93ae492";
+    sha256 = "0929yagw46vnnxf1dhaxggd84js2jnm2bfk4jxcm8xhgmyriwzsv";
+    rev = "e8775c62e8b0f62f5d4abf2e70dffb3635929ef2";
   };
 
   isLibrary = true;
@@ -23,7 +23,7 @@ mkDerivation {
     aeson ansi-terminal base binary binary-conduit bytestring conduit
     conduit-extra containers data-default data-msgpack deepseq
     exceptions extra errors
-    formatting hashable hslogger lens lifted-base mmorph
+    formatting hashable hslogger lens lifted-base log-warper mmorph
     monad-control monad-loops MonadRandom mtl network pqueue QuickCheck
     quickcheck-instances random safe semigroups serokell-util
     slave-thread stm stm-chans stm-conduit streaming-commons
@@ -32,7 +32,8 @@ mkDerivation {
   ];
   executableHaskellDepends = [
     async base binary binary-conduit conduit data-default data-msgpack
-    exceptions formatting hspec lens MonadRandom mtl QuickCheck random
+    exceptions formatting hspec lens MonadRandom mtl optparse-simple
+    QuickCheck random regex-tdfa
     serokell-util stm text text-format time-units transformers
   ];
   testHaskellDepends = [

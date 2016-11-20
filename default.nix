@@ -5,11 +5,18 @@
 , networkDiameter ? 6
 , mpcRelayInterval ? 16 } :
 
+
+let
+overrideAttrs = package: newAttrs: package.override (args: args // {
+              mkDerivation = expr: args.mkDerivation (expr // newAttrs);
+            });
+in
 with pkgs; rec {
 
   universum = hspkgs.callPackage ./universum.nix { };
   serokell-util = hspkgs.callPackage ./serokell-util.nix { };
   acid-state = hspkgs.callPackage ./acid-state.nix { };
+  log-warper = hspkgs.callPackage ./log-warper.nix { };
   time-warp = hspkgs.callPackage ./time-warp.nix { };
   cryptonite-openssl = hspkgs.callPackage ./cryptonite-openssl.nix { };
   pvss = hspkgs.callPackage ./pvss.nix { };
@@ -21,11 +28,16 @@ with pkgs; rec {
       inherit universum;
       inherit serokell-util;
       inherit acid-state;
+      inherit log-warper;
       inherit time-warp;
       inherit cryptonite-openssl;
       inherit pvss;
       inherit kademlia; 
       inherit cardano-sl;
+      th-expand-syns = overrideAttrs super.th-expand-syns {
+        version = "0.4.1.0";
+        sha256 = "1sj8psxnmjsxrfan2ryx8w40xlgc1p51m7r0jzd49mjwrj9gb661";
+      };
     };
   };
 

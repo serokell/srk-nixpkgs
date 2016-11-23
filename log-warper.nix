@@ -1,4 +1,4 @@
-{ mkDerivation, aeson, ansi-terminal, bytestring, data-default
+{ mkDerivation, aeson, ansi-terminal, base, bytestring, data-default
 , directory, errors, extra, exceptions, fetchgit, filepath, hashable, hslogger
 , lens, monad-control, mtl, serokell-util
 , stdenv, text, transformers, transformers-base, unordered-containers, yaml
@@ -8,7 +8,7 @@ mkDerivation {
   version = "0.1.0";
   src = fetchgit {
     url = "https://github.com/serokell/log-warper/";
-    sha256 = "0929yagw46vnnxf1dhaxggd84js2jnm2bfk4jxcm8xhgmyriwzsv";
+    sha256 = "0sl4gymiynz00031796nlar63wm3qlj0y7hps7wqpazwr84hkqdm";
     rev = "5de577c3ab25e6f9a4350a9646050a88b2b8996e";
   };
 

@@ -10,11 +10,11 @@
 }:
 mkDerivation {
   pname = "serokell-util";
-  version = "0.1.1";
+  version = "0.1.2.0";
   src = fetchgit {
     url = "https://github.com/serokell/serokell-util";
-    sha256 = "0vb9v6qpcwbly3lr7vbal200q77cjzxlnnnwgnc6y6msbxkpn6qr";
-    rev = "3fd9a911211276f1f2a2a9fe78bddbb2e1ffd503";
+    sha256 = "16l4a97cxzjinnv43573py164mnsshsv6lxp4ym8nvz280hfj2ml";
+    rev = "bca75e82dd74d5c75f1bf11ae0ac060a96170068";
   };
   libraryHaskellDepends = [
     acid-state aeson aeson-extra base base16-bytestring

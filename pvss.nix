@@ -7,8 +7,8 @@ mkDerivation {
   version = "0.1.0.0";
   src = fetchgit {
     url = "https://github.com/input-output-hk/pvss-haskell";
-    sha256 = "0svfvw459dwnpin3vvn1ys007zpg3vgss473c3jbzfilc57zl1cc";
-    rev = "1b898a222341116d210f2d3a5566028e14a335ae";
+    sha256 = "1cna6wxpgb4sy7wvfkmf6y7jkk8bjybj85zdxl2zr0bnzg0qil8s";
+    rev = "42751055d1794627ac53b6404373dfc7b44a8366";
   };
   isLibrary = true;
   isExecutable = true;

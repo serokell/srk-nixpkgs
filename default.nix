@@ -30,7 +30,7 @@ with pkgs; rec {
       inherit acid-state;
       inherit log-warper;
       inherit time-warp;
-      inherit cryptonite-openssl;
+      #inherit cryptonite-openssl;
       inherit pvss;
       inherit kademlia; 
       inherit cardano-sl;
@@ -38,6 +38,13 @@ with pkgs; rec {
         version = "0.4.1.0";
         sha256 = "1sj8psxnmjsxrfan2ryx8w40xlgc1p51m7r0jzd49mjwrj9gb661";
       };
+      cryptonite-openssl = overrideAttrs super.cryptonite-openssl {
+        version = "0.3";
+        sha256 = "09pfpll3hxx49cbr0a1h1pk5602sql2gcd4783j3n44z4nsgij23";
+      };
+      mkDerivation = args: super.mkDerivation (args // {
+        enableLibraryProfiling = true;
+      });
     };
   };
 

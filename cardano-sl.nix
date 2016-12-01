@@ -31,8 +31,8 @@ in
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pos-haskell-prototype";
-      sha256 = "199lnmh8zxcw7bw4108rpv9ld42zxwngjkaw5viapfx95kxwrlnb";
-      rev = "60e94199e0527c600d229242f13db0c0cd42ae57";
+      sha256 = "0zyakpkvzs9pfxmfksw897s3i6rz1bh1fazaq8bhhlj1di4lgnv3";
+      rev = "abd81ebbc72b1dcffbc9e066038962e0622b0026";
     };
     enableExecutableProfiling = true;
     isLibrary = true;

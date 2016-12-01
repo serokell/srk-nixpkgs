@@ -5,7 +5,7 @@
 , hashable, HsOpenSSL, hspec, kademlia, lens, lifted-async, log-warper
 , lrucache, memory, monad-control, mtl, optparse-applicative
 , optparse-simple, parsec, pvss, QuickCheck, quickcheck-instances
-, random, safecopy, serokell-util, stdenv, stm, stm-containers
+, random, random-shuffle, safecopy, serokell-util, stdenv, stm, stm-containers
 , template-haskell, text, text-format, time, time-units, time-warp
 , transformers, transformers-base, universum, unordered-containers
 , UtilityTM, vector, yaml, Chart, Chart-diagrams, turtle
@@ -31,8 +31,8 @@ in
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pos-haskell-prototype";
-      sha256 = "0ij3bbk43p958909dpw7m1q286ihyzg7b14nw4fsy5z8ksqa29zz";
-      rev = "950635afa314e43dfab1d4ca840ea4ceffc6455c";
+      sha256 = "199lnmh8zxcw7bw4108rpv9ld42zxwngjkaw5viapfx95kxwrlnb";
+      rev = "60e94199e0527c600d229242f13db0c0cd42ae57";
     };
     enableExecutableProfiling = true;
     isLibrary = true;
@@ -47,7 +47,7 @@ in
       bytestring cereal containers cryptonite data-default data-msgpack
       derive ed25519 exceptions file-embed formatting hashable HsOpenSSL
       kademlia lens lifted-async log-warper lrucache memory monad-control mtl parsec
-      pvss QuickCheck quickcheck-instances random safecopy serokell-util
+      pvss QuickCheck quickcheck-instances random random-shuffle safecopy serokell-util
       stm stm-containers template-haskell text text-format time
       time-units time-warp transformers transformers-base universum
       unordered-containers UtilityTM vector yaml

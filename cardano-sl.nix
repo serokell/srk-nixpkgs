@@ -1,6 +1,6 @@
-{ mkDerivation, acid-state, aeson, ansi-terminal, async, base
+{ mkDerivation, acid-state, aeson, ansi-terminal, async, base, base58-bytestring
 , binary, binary-orphans, bytestring, cereal, containers
-, cryptonite, data-default, data-msgpack, derive, directory
+, cryptonite, data-default, data-msgpack, derive, directory, digest
 , ed25519, exceptions, fetchgit, file-embed, filepath, formatting
 , hashable, HsOpenSSL, hspec, kademlia, lens, lifted-async, log-warper
 , lrucache, memory, monad-control, mtl, optparse-applicative
@@ -45,9 +45,9 @@ in
     configureFlags = [ "-f-asserts" ];
     doCheck = false;
     libraryHaskellDepends = [
-      acid-state aeson ansi-terminal async base binary binary-orphans
+      acid-state aeson ansi-terminal async base base58-bytestring binary binary-orphans
       bytestring cereal containers cryptonite data-default data-msgpack
-      derive ed25519 exceptions file-embed formatting hashable HsOpenSSL
+      derive digest ed25519 exceptions file-embed formatting hashable HsOpenSSL
       kademlia lens lifted-async log-warper lrucache memory monad-control mtl parsec
       pvss QuickCheck quickcheck-instances random random-shuffle safecopy serokell-util
       stm stm-containers template-haskell text text-format time

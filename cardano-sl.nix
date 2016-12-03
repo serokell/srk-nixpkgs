@@ -9,6 +9,7 @@
 , template-haskell, text, text-format, time, time-units, time-warp
 , transformers, transformers-base, universum, unordered-containers
 , UtilityTM, vector, yaml, Chart, Chart-diagrams, turtle
+, wai, wai-extra, warp, servant-server, servant
 , genesisN, slotDuration, networkDiameter, mpcRelayInterval
 }:
 
@@ -31,8 +32,8 @@ in
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pos-haskell-prototype";
-      sha256 = "0zyakpkvzs9pfxmfksw897s3i6rz1bh1fazaq8bhhlj1di4lgnv3";
-      rev = "abd81ebbc72b1dcffbc9e066038962e0622b0026";
+      sha256 = "047ciz625lr7axnikpwrbwfb22k8iwgriab2fba6cbn6kmbz6i8m";
+      rev = "cc20d5bf40d316e71c11fb4c3084e5d006076743";
     };
     enableExecutableProfiling = true;
     isLibrary = true;
@@ -41,6 +42,7 @@ in
      echo "${defaultCardanoConfig}" > constants.yaml
     '';
     doHaddock = false;
+    configureFlags = [ "-f-asserts" ];
     doCheck = false;
     libraryHaskellDepends = [
       acid-state aeson ansi-terminal async base binary binary-orphans
@@ -50,7 +52,7 @@ in
       pvss QuickCheck quickcheck-instances random random-shuffle safecopy serokell-util
       stm stm-containers template-haskell text text-format time
       time-units time-warp transformers transformers-base universum
-      unordered-containers UtilityTM vector yaml
+      unordered-containers UtilityTM vector yaml wai wai-extra warp servant-server servant
     ];
     executableHaskellDepends = [
       base binary bytestring data-default directory filepath formatting log-warper

@@ -13,8 +13,8 @@ mkDerivation {
   version = "0.1.2.0";
   src = fetchgit {
     url = "https://github.com/serokell/serokell-util";
-    sha256 = "16l4a97cxzjinnv43573py164mnsshsv6lxp4ym8nvz280hfj2ml";
-    rev = "bca75e82dd74d5c75f1bf11ae0ac060a96170068";
+    sha256 = "0ab1ibm4hkadzscmhagrkka2kih6ikxj5crl5hhwm4iw0dd181q7";
+    rev = "cc49e80f9b5b5bafdcaa9ad3c8a3a7b3a23ca6db";
   };
   libraryHaskellDepends = [
     acid-state aeson aeson-extra base base16-bytestring

@@ -8,8 +8,8 @@ mkDerivation {
   version = "0.1.0";
   src = fetchgit {
     url = "https://github.com/serokell/log-warper/";
-    sha256 = "00k8sia0wfiv8vp9lg0axd7plcfrd27dvp5q2lx4vczqsjjgnxpg";
-    rev = "d3b5f518e2827a961ba884a8009d4cfd4ccc737b";
+    sha256 = "0s5kplzxfycb1aa9d09vwks1bqwhv56si3c5i5rbyjv9pj4jjg0b";
+    rev = "409055f388e321aa3a9c97cd66215aad2c414adb";
   };
 
   isLibrary = true;

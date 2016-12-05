@@ -36,7 +36,10 @@ in
       rev = "cc20d5bf40d316e71c11fb4c3084e5d006076743";
     };
     enableExecutableProfiling = true;
-    isLibrary = true;
+    # Build statically to reduce closure size
+    enableSharedLibraries = false;
+    enableSharedExecutables = false;
+    isLibrary = false;
     isExecutable = true;
     patchPhase = ''
      echo "${defaultCardanoConfig}" > constants.yaml

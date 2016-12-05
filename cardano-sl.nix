@@ -32,8 +32,8 @@ in
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pos-haskell-prototype";
-      sha256 = "047ciz625lr7axnikpwrbwfb22k8iwgriab2fba6cbn6kmbz6i8m";
-      rev = "cc20d5bf40d316e71c11fb4c3084e5d006076743";
+      sha256 = "1cfw8y41s53mhfd0g45z75zakg5wva45xgh8nx7l121rb0krjksa";
+      rev = "2e471924cb38969b9b7a8eec7f9e4b3696882d06";
     };
     enableExecutableProfiling = true;
     # Build statically to reduce closure size
@@ -45,7 +45,7 @@ in
      echo "${defaultCardanoConfig}" > constants.yaml
     '';
     doHaddock = false;
-    configureFlags = [ "-f-asserts" ];
+    configureFlags = [ "-f-asserts" "-fwith-wallet" ];
     doCheck = false;
     libraryHaskellDepends = [
       acid-state aeson ansi-terminal async base base58-bytestring binary binary-orphans

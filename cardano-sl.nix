@@ -47,6 +47,10 @@ in
     doHaddock = false;
     configureFlags = [ "-f-asserts" "-fwith-wallet" ];
     doCheck = false;
+    postFixup = ''
+      echo "Removing $out/lib to spare HDD space for deployments"
+      rm -rf $out/lib
+    '';
     libraryHaskellDepends = [
       acid-state aeson ansi-terminal async base base58-bytestring binary binary-orphans
       bytestring cereal containers cryptonite data-default data-msgpack

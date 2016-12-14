@@ -10,6 +10,7 @@
 , transformers, transformers-base, universum, unordered-containers
 , UtilityTM, vector, yaml, Chart, Chart-diagrams, turtle
 , wai, wai-extra, warp, servant-server, servant
+, plutus-prototype, rocksdb-haskell, deriving-compat, IfElse
 , genesisN, slotDuration, networkDiameter, mpcRelayInterval
 }:
 
@@ -32,11 +33,11 @@ in
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pos-haskell-prototype";
-      #rev = "cf0d230b44da4e8270ce45e72f1156b530099ff6";
-      #sha256 = "1z5qhwkwl32x18zla7dqn7nffh7j5fcfkpz1fz0vz0dsr1azq1cm";
+      rev = "1d613081f1843c6c4791dd856d71c511d661cff1";
+      sha256 = "0v71crff6pp21ahx0yqq5pjrag7iv4nh7r7syy0s4gs2lip762mg";
       # profiling branch
-      rev = "86bbb4386635a502334bcfcea8d9800bdf4ef45e";
-      sha256 = "0vwiy273717l6237ca9pf3rmn64iw90pwil425j3lh73zivb6fyf";
+      #rev = "86bbb4386635a502334bcfcea8d9800bdf4ef45e";
+      #sha256 = "0vwiy273717l6237ca9pf3rmn64iw90pwil425j3lh73zivb6fyf";
     };
     # false because it's incompatible with eventlog
     enableExecutableProfiling = true;
@@ -64,11 +65,12 @@ in
       stm stm-containers template-haskell text text-format time
       time-units time-warp transformers transformers-base universum
       unordered-containers UtilityTM vector yaml wai wai-extra warp servant-server servant
+      plutus-prototype rocksdb-haskell deriving-compat IfElse
     ];
     executableHaskellDepends = [
       base binary bytestring data-default directory filepath formatting log-warper
       optparse-applicative optparse-simple parsec serokell-util time-warp
-      universum Chart Chart-diagrams turtle
+      universum Chart Chart-diagrams turtle plutus-prototype
     ];
     testHaskellDepends = [
       base binary bytestring cereal cryptonite data-msgpack formatting

@@ -13,11 +13,11 @@ mkDerivation {
   version = "1.1.0.1";
   src = fetchgit {
     url = "https://github.com/input-output-hk/time-warp/";
-    #sha256 = "1rcb4wrablfiwvwwnpa60nikg6wmykck9awwyrqhalkpvfvgbnfm";
-    #rev = "ea933cf9de84041f92339c8f41bcf285fdd1b0d7";
+    rev = "ac8ff481d00f85cdce163b8f3cdf14bce59e1aab";
+    sha256 = "114c9p67a0j9d532w8z6kha0chsrdi8h6n8w43481b7bir781zgb";
     # profiling branch
-    sha256 = "0dvfhgj3r8y7aias5c810frqnczbm3pi721pc2mrxqxbapv5rnf4";
-    rev = "516daa85b7e8632ed80fa4b16476fd27bdefd7ba";
+    #rev = "516daa85b7e8632ed80fa4b16476fd27bdefd7ba";
+    #sha256 = "0dvfhgj3r8y7aias5c810frqnczbm3pi721pc2mrxqxbapv5rnf4";
   };
 
   isLibrary = true;

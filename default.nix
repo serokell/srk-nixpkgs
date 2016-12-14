@@ -19,6 +19,8 @@ with pkgs; rec {
   log-warper = hspkgs.callPackage ./log-warper.nix { };
   time-warp = hspkgs.callPackage ./time-warp.nix { };
   cryptonite-openssl = hspkgs.callPackage ./cryptonite-openssl.nix { };
+  plutus-prototype = hspkgs.callPackage ./plutus-prototype.nix { };
+  rocksdb-haskell = hspkgs.callPackage ./rocksdb-haskell.nix { };
   pvss = hspkgs.callPackage ./pvss.nix { };
   kademlia = hspkgs.callPackage ./kademlia.nix { };
   cardano-sl = hspkgs.callPackage ./cardano-sl.nix { inherit genesisN slotDuration networkDiameter mpcRelayInterval; };
@@ -34,6 +36,7 @@ with pkgs; rec {
       inherit pvss;
       inherit kademlia; 
       inherit cardano-sl;
+      inherit plutus-prototype rocksdb-haskell;
       th-expand-syns = overrideAttrs super.th-expand-syns {
         version = "0.4.1.0";
         sha256 = "1sj8psxnmjsxrfan2ryx8w40xlgc1p51m7r0jzd49mjwrj9gb661";

@@ -12,13 +12,18 @@ mkDerivation {
   pname = "time-warp";
   version = "1.1.0.1";
   src = fetchgit {
-    url = "https://github.com/serokell/time-warp/";
-    sha256 = "1rcb4wrablfiwvwwnpa60nikg6wmykck9awwyrqhalkpvfvgbnfm";
-    rev = "ea933cf9de84041f92339c8f41bcf285fdd1b0d7";
+    url = "https://github.com/input-output-hk/time-warp/";
+    #sha256 = "1rcb4wrablfiwvwwnpa60nikg6wmykck9awwyrqhalkpvfvgbnfm";
+    #rev = "ea933cf9de84041f92339c8f41bcf285fdd1b0d7";
+    # profiling branch
+    sha256 = "0dvfhgj3r8y7aias5c810frqnczbm3pi721pc2mrxqxbapv5rnf4";
+    rev = "516daa85b7e8632ed80fa4b16476fd27bdefd7ba";
   };
 
   isLibrary = true;
   isExecutable = true;
+  enableLibraryProfiling = true;
+  enableExecutableProfiling = true;
   libraryHaskellDepends = [
     aeson ansi-terminal base binary binary-conduit bytestring conduit
     conduit-extra containers data-default data-msgpack deepseq

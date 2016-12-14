@@ -32,9 +32,13 @@ in
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pos-haskell-prototype";
-      sha256 = "1z5qhwkwl32x18zla7dqn7nffh7j5fcfkpz1fz0vz0dsr1azq1cm";
-      rev = "cf0d230b44da4e8270ce45e72f1156b530099ff6";
+      #rev = "cf0d230b44da4e8270ce45e72f1156b530099ff6";
+      #sha256 = "1z5qhwkwl32x18zla7dqn7nffh7j5fcfkpz1fz0vz0dsr1azq1cm";
+      # profiling branch
+      rev = "86bbb4386635a502334bcfcea8d9800bdf4ef45e";
+      sha256 = "0vwiy273717l6237ca9pf3rmn64iw90pwil425j3lh73zivb6fyf";
     };
+    # false because it's incompatible with eventlog
     enableExecutableProfiling = true;
     # Build statically to reduce closure size
     enableSharedLibraries = false;

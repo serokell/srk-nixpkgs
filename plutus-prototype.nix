@@ -6,8 +6,8 @@ mkDerivation {
   version = "0.1.0.0";
   src = fetchgit {
     url = "https://github.com/input-output-hk/plutus-prototype.git";
-    sha256 = "1fcl5h57zxjbc6ra6v17h9swjgngg6qx5qdfsjvlhdmg9c7fivyr";
-    rev = "f0498b9cfc7e0204cfe8709a89370f3190d3195f";
+    sha256 = "14c1iksp5ic20x921b9bgbw490gc8naqn4348d08y0yc8x0sq3ys";
+    rev = "ebae929cd83104fe5c0b1153c9d37d34e3a0739f";
   };
   libraryHaskellDepends = [
     base bifunctors binary bytestring cryptonite lens memory mtl parsec

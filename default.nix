@@ -1,4 +1,4 @@
-{ pkgs
+{ pkgs ? (import <nixpkgs> {})
 , compiler ? pkgs.haskell.packages.ghc801
 , genesisN ? 3 
 , slotDuration ? 20 
@@ -7,17 +7,37 @@
 
 
 let
-overrideAttrs = package: newAttrs: package.override (args: args // {
-              mkDerivation = expr: args.mkDerivation (expr // newAttrs);
-            });
-in
-with pkgs; rec {
+  overrideAttrs = package: newAttrs:
+    package.override (args: args // {
+      mkDerivation = expr: args.mkDerivation (expr // newAttrs);
+    });
 
+  # Autogenerate default.nix from cabal file in src
+  haskellPackageGen = { doHaddock ? false, doFilter ? false }: src:
+     let filteredSrc = builtins.filterSource (n: t: t != "unknown") src;
+         package = pkgs.runCommand "default.nix" {} ''
+           ${compiler.cabal2nix}/bin/cabal2nix \
+             ${if doFilter then filteredSrc else src} \
+             ${if doHaddock
+                 then ""
+                 else "--no-haddock"} \
+             > $out
+         '';
+     in import package;
+in with pkgs; rec {
   universum = hspkgs.callPackage ./universum.nix { };
   serokell-util = hspkgs.callPackage ./serokell-util.nix { };
   acid-state = hspkgs.callPackage ./acid-state.nix { };
   log-warper = hspkgs.callPackage ./log-warper.nix { };
   time-warp = hspkgs.callPackage ./time-warp.nix { };
+  tw-rework-sketch = hspkgs.callPackage (
+    haskellPackageGen {} (fetchFromGitHub {
+        owner = "serokell";
+        repo = "tw-rework-sketch";
+        rev = "2a3bf31d3000d2e57d74ec48f116458c24edf5fd";
+        sha256 = "1n8s1cbb8alcdrr283xvzww7ii6s95jvnl1ylp3pz3b2z9qfx6qv";
+      })
+  ) {};
   cryptonite-openssl = hspkgs.callPackage ./cryptonite-openssl.nix { };
   plutus-prototype = hspkgs.callPackage ./plutus-prototype.nix { };
   rocksdb-haskell = hspkgs.callPackage ./rocksdb-haskell.nix { };

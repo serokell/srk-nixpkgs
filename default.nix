@@ -5,6 +5,7 @@
 , networkDiameter ? 6
 , mpcRelayInterval ? 16 } :
 
+with pkgs; 
 
 let
   overrideAttrs = package: newAttrs:
@@ -24,20 +25,33 @@ let
              > $out
          '';
      in import package;
-in with pkgs; rec {
+  kademliaTW = fetchFromGitHub {
+    owner = "serokell";
+    repo = "kademlia";
+    rev = "7a0bdfe8bba2503ab96bddd9021ba36e50e5ccc2";
+    sha256 = "05bg2wf9nvhh0xwb2p5camnkvzaiyav8jh0l53d5wh53y4jmd6sy";
+  };
+in rec {
   universum = hspkgs.callPackage ./universum.nix { };
   serokell-util = hspkgs.callPackage ./serokell-util.nix { };
   acid-state = hspkgs.callPackage ./acid-state.nix { };
-  log-warper = hspkgs.callPackage ./log-warper.nix { };
+  log-warper = hspkgs.callPackage (
+    haskellPackageGen {} (fetchFromGitHub {
+        owner = "serokell";
+        repo = "log-warper";
+        rev = "14d0d2f391e2ebb6a9679f1dd117c325aff53637";
+        sha256 = "12zb8ww7f4dh0q1mp5l8kjk4hxj80da0b4wpzsn7nrzry6xk6jxl";
+      })
+  ) { };
   time-warp = hspkgs.callPackage ./time-warp.nix { };
   tw-rework-sketch = hspkgs.callPackage (
     haskellPackageGen {} (fetchFromGitHub {
         owner = "serokell";
         repo = "tw-rework-sketch";
-        rev = "e0e865b3fc7cbfeb0b6cf560fe1357ceb997efd8";
-        sha256 = "1frvcz195k9fnc7pgy9zbwbjf4vv9ml2x37xy94m1s8b68y2ld22";
+        rev = "36bf0e0ba637f1934f641fd0a1c38ae3c066af6b";
+        sha256 = "1ayz2ja31v9qgi39ccy1i3pj1hq0x47q8nzqcfb221b3mcbnvq00";
       })
-  ) {};
+  ) { kademlia = hspkgs.callPackage (haskellPackageGen {} kademliaTW) {}; };
   cryptonite-openssl = hspkgs.callPackage ./cryptonite-openssl.nix { };
   plutus-prototype = hspkgs.callPackage ./plutus-prototype.nix { };
   rocksdb-haskell = hspkgs.callPackage ./rocksdb-haskell.nix { };
@@ -60,6 +74,10 @@ in with pkgs; rec {
       th-expand-syns = overrideAttrs super.th-expand-syns {
         version = "0.4.1.0";
         sha256 = "1sj8psxnmjsxrfan2ryx8w40xlgc1p51m7r0jzd49mjwrj9gb661";
+      };
+      network-transport-inmemory = overrideAttrs super.network-transport-inmemory {
+        version = "0.5.2";
+        sha256 = "0kpgx6r60cczr178ras5ia9xiihrs5a9hnfyv45djmq16faxfic2";
       };
       cryptonite-openssl = overrideAttrs super.cryptonite-openssl {
         version = "0.3";

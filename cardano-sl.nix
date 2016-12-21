@@ -1,7 +1,7 @@
 { mkDerivation, acid-state, aeson, ansi-terminal, async, base, base58-bytestring
 , binary, binary-orphans, bytestring, cereal, containers
 , cryptonite, data-default, data-msgpack, derive, directory, digest
-, ed25519, exceptions, fetchgit, file-embed, filepath, formatting
+, ed25519, exceptions, fetchgit, file-embed, filelock, filepath, formatting
 , hashable, HsOpenSSL, hspec, kademlia, lens, lifted-async, log-warper
 , lrucache, memory, monad-control, mtl, optparse-applicative
 , optparse-simple, parsec, pvss, QuickCheck, quickcheck-instances
@@ -33,8 +33,8 @@ in
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pos-haskell-prototype";
-      rev = "3781607b41ba0c6b0e84a40de5422cdd63ed8639";
-      sha256 = "07bxybag3gkdmkgfc8c1gh8501hj7x6n9qxv13l79lssshrh2yhd";
+      rev = "af5602ec0aa5ac889ead22d513090da72b314a50";
+      sha256 = "1r3ji15vcfxmdxkq2mx828d98hln305xp5v2mfff0q9i20v4gg0f";
       # profiling branch
       #rev = "86bbb4386635a502334bcfcea8d9800bdf4ef45e";
       #sha256 = "0vwiy273717l6237ca9pf3rmn64iw90pwil425j3lh73zivb6fyf";
@@ -59,7 +59,7 @@ in
     libraryHaskellDepends = [
       acid-state aeson ansi-terminal async base base58-bytestring binary binary-orphans
       bytestring cereal containers cryptonite data-default data-msgpack
-      derive digest ed25519 exceptions file-embed formatting hashable HsOpenSSL
+      derive digest ed25519 exceptions file-embed filelock formatting hashable HsOpenSSL
       kademlia lens lifted-async log-warper lrucache memory monad-control mtl parsec
       pvss QuickCheck quickcheck-instances random random-shuffle safecopy serokell-util
       stm stm-containers template-haskell text text-format time

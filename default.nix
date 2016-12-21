@@ -34,8 +34,8 @@ in with pkgs; rec {
     haskellPackageGen {} (fetchFromGitHub {
         owner = "serokell";
         repo = "tw-rework-sketch";
-        rev = "2a3bf31d3000d2e57d74ec48f116458c24edf5fd";
-        sha256 = "1n8s1cbb8alcdrr283xvzww7ii6s95jvnl1ylp3pz3b2z9qfx6qv";
+        rev = "e0e865b3fc7cbfeb0b6cf560fe1357ceb997efd8";
+        sha256 = "1frvcz195k9fnc7pgy9zbwbjf4vv9ml2x37xy94m1s8b68y2ld22";
       })
   ) {};
   cryptonite-openssl = hspkgs.callPackage ./cryptonite-openssl.nix { };

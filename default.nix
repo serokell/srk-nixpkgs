@@ -48,8 +48,8 @@ in rec {
     haskellPackageGen {} (fetchFromGitHub {
         owner = "serokell";
         repo = "tw-rework-sketch";
-        rev = "36bf0e0ba637f1934f641fd0a1c38ae3c066af6b";
-        sha256 = "1ayz2ja31v9qgi39ccy1i3pj1hq0x47q8nzqcfb221b3mcbnvq00";
+        rev = "e85329f2b91ea2a268526637777a2bd7f3190d60";
+        sha256 = "0jaqnnj6py4km21324vc48xgscs8bydaig8w6fqflgpl0v3iny1b";
       })
   ) { kademlia = hspkgs.callPackage (haskellPackageGen {} kademliaTW) {}; };
   cryptonite-openssl = hspkgs.callPackage ./cryptonite-openssl.nix { };

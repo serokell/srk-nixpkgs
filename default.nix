@@ -6,6 +6,7 @@
 , mpcRelayInterval ? 16 } :
 
 with pkgs; 
+with (import <nixpkgs/pkgs/development/haskell-modules/lib.nix> { inherit pkgs;});
 
 let
   overrideAttrs = package: newAttrs:
@@ -140,7 +141,7 @@ in rec {
         version = "0.5.2";
         sha256 = "0kpgx6r60cczr178ras5ia9xiihrs5a9hnfyv45djmq16faxfic2";
       };
-      cryptonite-openssl = overrideAttrs super.cryptonite-openssl {
+      cryptonite-openssl = overrideAttrs (overrideCabal super.cryptonite-openssl (drv: { libraryHaskellDepends = drv.libraryHaskellDepends ++ [super.cryptonite];})) {
         version = "0.3";
         sha256 = "09pfpll3hxx49cbr0a1h1pk5602sql2gcd4783j3n44z4nsgij23";
       };

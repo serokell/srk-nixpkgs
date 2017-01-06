@@ -27,6 +27,13 @@ let
     defaultPeers: []
     sysTimeBroadcastSlots: 6
     mpcSendInterval: 18 # must be less than (k * slotDuration - networkDiameter)
+    mdNoBlocksSlotThreshold: 10
+    mdNoCommitmentsEpochThreshold: 3
+    vssMaxTTL : 100 # epochs
+    protocolMagic: 0
+    enchancedMessageBroadcast: 2
+    updateServers: []
+    maxBlockProxySKs: 10000
   '';
 in
   mkDerivation {
@@ -51,7 +58,7 @@ in
      echo "${defaultCardanoConfig}" > constants.yaml
     '';
     doHaddock = false;
-    configureFlags = [ "-f-asserts" "-fwith-wallet" ];
+    configureFlags = [ "-f-asserts" "-f-with-web" "-fwith-wallet" ];
     doCheck = false;
     postFixup = ''
       echo "Removing $out/lib to spare HDD space for deployments"

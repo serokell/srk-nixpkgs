@@ -43,8 +43,8 @@ in rec {
     haskellPackageGen {} (fetchFromGitHub {
         owner = "serokell";
         repo = "universum";
-        rev = "d347ccf3605d0851dd0f7046fe63f364510ef1a0";
-        sha256 = "07zbqp2cgzp3795f3z9jmgd700ccqvgj18pc2d95q7q7cc88fix0";
+        rev = "db3cd301545e5da000e53ca2cdf274e0386192bf";
+        sha256 = "1il4z2kkkgp201h8b9j4li123llca98wr79pg4dpk2g9kjcrmkf9";
       })
   ) { };
   acid-state = hspkgs.callPackage (
@@ -95,12 +95,12 @@ in rec {
         sha256 = "0p23v8qlqrfvsiycdlacx8y3hksnrjfjln3wfqcnlrk8dz4fd5cv";
       })
   ) { };
-  hs-ed25519 = hspkgs.callPackage (
+  ed25519 = hspkgs.callPackage (
     haskellPackageGen {} (fetchFromGitHub {
         owner = "domenkozar";
         repo = "hs-ed25519";
         rev = "96e5db162d88482bc0e120dc61cadd45c168c275";
-        sha256 = "10y7qfxwc0zi3v3p4jcqfdkg5z9l8fy8vxv06h60b8n3di649r4s";
+        sha256 = "1d3rry1lycdk4dq9ivhzlb5ygpr009ahfj07dsy3cigshy8r0llz";
       })
   ) { };
   pvss = hspkgs.callPackage (
@@ -132,7 +132,8 @@ in rec {
   hspkgs = compiler.override {
     overrides = self: super: {
       inherit cardano-sl;
-      inherit universum acid-state log-warper kademlia plutus-prototype rocksdb-haskell hs-ed25519 pvss serokell-util time-warp;
+      inherit universum acid-state log-warper kademlia plutus-prototype rocksdb-haskell ed25519 pvss serokell-util time-warp;
+      QuickCheck = super.QuickCheck_2_9_2;
       th-expand-syns = overrideAttrs super.th-expand-syns {
         version = "0.4.1.0";
         sha256 = "1sj8psxnmjsxrfan2ryx8w40xlgc1p51m7r0jzd49mjwrj9gb661";

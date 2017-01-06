@@ -14,7 +14,7 @@ let
     });
 
   # Autogenerate default.nix from cabal file in src
-  haskellPackageGen = { doHaddock ? false, doFilter ? false }: src:
+  haskellPackageGen = { doHaddock ? false, doFilter ? false, doCheck ? true, profiling ? false }: src:
      let filteredSrc = builtins.filterSource (n: t: t != "unknown") src;
          package = pkgs.runCommand "default.nix" {} ''
            ${compiler.cabal2nix}/bin/cabal2nix \
@@ -22,6 +22,12 @@ let
              ${if doHaddock
                  then ""
                  else "--no-haddock"} \
+             ${if doCheck
+                 then ""
+                 else "--no-check"} \
+             ${if profiling
+                 then "--enable-profiling"
+                 else ""} \
              > $out
          '';
      in import package;
@@ -81,7 +87,7 @@ in rec {
       })
   ) { };
   kademlia = hspkgs.callPackage (
-    haskellPackageGen {} (fetchFromGitHub {
+    haskellPackageGen { doCheck = false; } (fetchFromGitHub {
         owner = "serokell";
         repo = "kademlia";
         rev = "278171b8ab104c78aa95bcdd9b63c8ced4fb1ed2";
@@ -97,7 +103,7 @@ in rec {
       })
   ) { };
   pvss = hspkgs.callPackage (
-    haskellPackageGen {} (fetchFromGitHub {
+    haskellPackageGen { doCheck = false; } (fetchFromGitHub {
         owner = "input-output-hk";
         repo = "pvss-haskell";
         rev = "42751055d1794627ac53b6404373dfc7b44a8366";
@@ -113,7 +119,7 @@ in rec {
       })
   ) { };
   time-warp = hspkgs.callPackage (
-    haskellPackageGen {} (fetchFromGitHub {
+    haskellPackageGen { profiling = true; } (fetchFromGitHub {
         owner = "serokell";
         repo = "time-warp";
         rev = "4d5c82fc05f5c01919980e28e64de3753e317546";
@@ -140,6 +146,8 @@ in rec {
       };
       mkDerivation = args: super.mkDerivation (args // {
         enableLibraryProfiling = true;
+        # Remove after hspec-expectations-pretty-diff-0.7.2.4 tests fixed (nneded for purescript-bridge)
+        doCheck = false;
       });
     };
   };

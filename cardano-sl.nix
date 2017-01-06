@@ -2,11 +2,12 @@
 , binary, binary-orphans, bytestring, cereal, containers
 , cryptonite, data-default, data-msgpack, derive, directory, digest
 , ed25519, exceptions, fetchgit, file-embed, filelock, filepath, formatting
-, hashable, HsOpenSSL, hspec, kademlia, lens, lifted-async, log-warper
-, lrucache, memory, monad-control, mtl, optparse-applicative
-, optparse-simple, parsec, pvss, QuickCheck, quickcheck-instances
-, random, random-shuffle, safecopy, serokell-util, stdenv, stm, stm-containers
-, template-haskell, text, text-format, time, time-units, time-warp
+, hashable, HsOpenSSL, hspec, http-client, http-client-tls, http-conduit
+, kademlia, lens, lifted-async, log-warper
+, lrucache, memory, monad-control, mtl, neat-interpolation, optparse-applicative
+, optparse-simple, parsec, pvss, purescript-bridge, QuickCheck, quickcheck-instances
+, random, random-shuffle, safecopy, serokell-util, stdenv, stm, stm-containers, servant-docs
+, template-haskell, text, text-format, th-lift-instances, time, time-units, time-warp
 , transformers, transformers-base, universum, unordered-containers
 , UtilityTM, vector, yaml, Chart, Chart-diagrams, turtle
 , wai, wai-extra, warp, servant-server, servant
@@ -20,7 +21,7 @@ let
     slotDurationSec: ${toString slotDuration}
     networkDiameter: ${toString networkDiameter}
     neighboursSendThreshold: 4
-    genesisN: ${toString genesisN}
+    genesisN: 1000 # ${toString genesisN}
     maxLocalTxs: 10000
     mpcRelayInterval: ${toString mpcRelayInterval}
     defaultPeers: []
@@ -60,9 +61,11 @@ in
       acid-state aeson ansi-terminal async base base58-bytestring binary binary-orphans
       bytestring cereal containers cryptonite data-default data-msgpack
       derive digest ed25519 exceptions file-embed filelock formatting hashable HsOpenSSL
-      kademlia lens lifted-async log-warper lrucache memory monad-control mtl parsec
+      http-client http-client-tls http-conduit
+      kademlia lens lifted-async log-warper lrucache memory monad-control mtl
+      neat-interpolation parsec servant-docs purescript-bridge
       pvss QuickCheck quickcheck-instances random random-shuffle safecopy serokell-util
-      stm stm-containers template-haskell text text-format time
+      stm stm-containers template-haskell text text-format th-lift-instances time
       time-units time-warp transformers transformers-base universum
       unordered-containers UtilityTM vector yaml wai wai-extra warp servant-server servant
       plutus-prototype rocksdb-haskell deriving-compat IfElse

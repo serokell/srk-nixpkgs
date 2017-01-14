@@ -7,33 +7,55 @@
 , lrucache, memory, monad-control, mtl, neat-interpolation, optparse-applicative
 , optparse-simple, parsec, pvss, purescript-bridge, QuickCheck, quickcheck-instances
 , random, random-shuffle, safecopy, serokell-util, stdenv, stm, stm-containers, servant-docs
-, template-haskell, text, text-format, th-lift-instances, time, time-units, time-warp
+, template-haskell, text, text-format, th-lift-instances, time, time-units, time-warp, tw-rework-sketch
 , transformers, transformers-base, universum, unordered-containers
 , UtilityTM, vector, yaml, Chart, Chart-diagrams, turtle
-, wai, wai-extra, warp, servant-server, servant
+, wai, wai-websockets, wai-extra, warp, websockets, servant-server, servant
 , plutus-prototype, rocksdb-haskell, deriving-compat, IfElse
 , genesisN, slotDuration, networkDiameter, mpcRelayInterval
 }:
 
 let 
   defaultCardanoConfig = ''
+
+    # Fundamental constants for core protocol
     k: 6
     slotDurationSec: ${toString slotDuration}
+    
+    # Networking
     networkDiameter: ${toString networkDiameter}
     neighboursSendThreshold: 4
+    networkConnectionTimeout: 2000
+
+    # Time slave/lord
+    sysTimeBroadcastSlots: 6
+
     genesisN: 1000 # ${toString genesisN}
     maxLocalTxs: 10000
-    mpcRelayInterval: ${toString mpcRelayInterval}
     defaultPeers: []
-    sysTimeBroadcastSlots: 6
-    mpcSendInterval: 18 # must be less than (k * slotDuration - networkDiameter)
     mdNoBlocksSlotThreshold: 10
     mdNoCommitmentsEpochThreshold: 3
-    vssMaxTTL : 100 # epochs
     protocolMagic: 0
-    enchancedMessageBroadcast: 2
-    updateServers: []
+    enhancedMessageBroadcast: 2
+    blockRetrievalQueueSize: 100
+
+    # GodTossing
+    vssMaxTTL: 10 # epochs
+    vssMinTTL: 2 # epochs
+    mpcSendInterval: 12 # must be less than (k * slotDuration - networkDiameter)
+    mpcThreshold: 0.01 # 1% of stake
+
+    # delegation
     maxBlockProxySKs: 10000
+    delegationThreshold: 0.005 # 0.5% of stake
+    ntpResponseTimeout: 1000000 # 1 sec
+    ntpPollDelay: 300000000 # 300 sec
+
+    # update mechanism
+    updateServers: []
+    updateProposalThreshold: 0.1 # 10% of total stake
+    updateVoteThreshold: 0.001 # 0.1% of total stake
+    updateImplicitApproval: 40000 # slots    
   '';
 in
   mkDerivation {
@@ -41,18 +63,18 @@ in
     version = "0.1.0.0";
     src = fetchgit {
       url = "https://github.com/input-output-hk/pos-haskell-prototype";
-      #  old master (works)
-      rev = "fd6e52775c42a53907c13113a57ad67535407f1a";
-      sha256 = "1whfixrqh49fzijzq4sb7z823msnhn6c8jvi38h3ziz09xkh61qi";
-      #  new master (doesn't work)
-      #rev = "c6ff38d03e29635bfde1007e4f6b88cda543bfc8";
-      #sha256 = "0jryw5z9nar7rxldh8r4b8s7vdxixr5n7bd342yw8y5yp56dvmfw";
+      #  tests-stable (works)
+      #rev = "4590e674642d59cfa2cd7e226a0a869f3ca35929";
+      #sha256 = "1zsqavpnqagzr1n4wrgp5x7hlv4iybgwgq337ngh72yd4zxsxndi";
+      #  new master
+      rev = "6fe78dd4ac0975183b24e51025e83fa5649bb14e";
+      sha256 = "1r451n38b191aq4y27mlalpf59rxhgxx57qmvk6axpmkhv4z5amp";
       #  profiling branch
       #rev = "86bbb4386635a502334bcfcea8d9800bdf4ef45e";
       #sha256 = "0vwiy273717l6237ca9pf3rmn64iw90pwil425j3lh73zivb6fyf";
     };
     # false because it's incompatible with eventlog
-    enableExecutableProfiling = true;
+    enableExecutableProfiling = false;
     # Build statically to reduce closure size
     enableSharedLibraries = false;
     enableSharedExecutables = false;
@@ -62,7 +84,7 @@ in
      echo "${defaultCardanoConfig}" > constants.yaml
     '';
     doHaddock = false;
-    configureFlags = [ "-f-asserts" "-f-with-web" "-fwith-wallet" ];
+    configureFlags = [ "-f-asserts" "-fwith-wallet" ];
     doCheck = false;
     postFixup = ''
       echo "Removing $out/lib to spare HDD space for deployments"
@@ -77,9 +99,10 @@ in
       neat-interpolation parsec servant-docs purescript-bridge
       pvss QuickCheck quickcheck-instances random random-shuffle safecopy serokell-util
       stm stm-containers template-haskell text text-format th-lift-instances time
-      time-units time-warp transformers transformers-base universum
+      time-units time-warp transformers transformers-base tw-rework-sketch universum
       unordered-containers UtilityTM vector yaml wai wai-extra warp servant-server servant
       plutus-prototype rocksdb-haskell deriving-compat IfElse
+      wai-websockets websockets
     ];
     executableHaskellDepends = [
       base binary bytestring data-default directory filepath formatting log-warper

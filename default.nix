@@ -35,8 +35,8 @@ let
   kademliaTW = fetchFromGitHub {
     owner = "serokell";
     repo = "kademlia";
-    rev = "7a0bdfe8bba2503ab96bddd9021ba36e50e5ccc2";
-    sha256 = "05bg2wf9nvhh0xwb2p5camnkvzaiyav8jh0l53d5wh53y4jmd6sy";
+    rev = "8ebc91484994fbd1b8383d42786ae40bb5c99042";
+    sha256 = "0wlfb79xr2z8pd8pkzyz806kbh385b7gcx1s9h3jg46mq4ffi1y7";
   };
 in rec {
   universum = hspkgs.callPackage (
@@ -59,40 +59,48 @@ in rec {
     haskellPackageGen {} (fetchFromGitHub {
         owner = "serokell";
         repo = "log-warper";
-        rev = "8b1f81014383e9b21c8378e6c2ab388d32463d87";
-        sha256 = "01fwlbf4v9icnggam65c8bbymjs6whi7m026gzhf0287kl7l88cg";
+        rev = "e05d74587ff9270891a3e57f1f15d9e91c8d2c83";
+        sha256 = "19f0b2gi9h9ja9jp7na1l926ciy47gvi65gmjh9vkkswkh2ipwg7";
+      })
+  ) { };
+  network-transport-tcp = hspkgs.callPackage (
+    haskellPackageGen {} (fetchFromGitHub {
+        owner = "serokell";
+        repo = "network-transport-tcp";
+        rev = "586c9bf830252476522cab6274ef8ddc32615686";
+        sha256 = "04q73wpi5kzqr4fk1zm5bgayljjc62qi34yls59zwv73k745dwzp";
       })
   ) { };
   tw-rework-sketch = hspkgs.callPackage (
     haskellPackageGen {} (fetchFromGitHub {
         owner = "serokell";
         repo = "tw-rework-sketch";
-        rev = "152625804ebb8c38033ae92228fb3ddbe5955e76";
-        sha256 = "1zb74ba0m60iarc90i1hj7vqivlfqy6nwlw73kp5zhzn8xi2zryb";
+        rev = "8d4773a6a03b9b1d676115ba4bf6a5021bc184c9";
+        sha256 = "0ny0pmkbcinfizbf9q3vlvpscq10h59b492rnf0xmsyh5fy11aw7";
       })
-  ) { kademlia = hspkgs.callPackage (haskellPackageGen {} kademliaTW) {}; };
+  ) { };
   plutus-prototype = hspkgs.callPackage (
     haskellPackageGen {} (fetchFromGitHub {
         owner = "input-output-hk";
         repo = "plutus-prototype";
-        rev = "aa6d535cf47fe92aabfbdb8bb709f5cba52ab793";
-        sha256 = "0blmkgvd40i8md8wgq41cfh9gs39x0hmfz1513qzjndwkahw3g8q";
+        rev = "62b4aaf5e8dfe70a7734a555032d8461ce4a812a";
+        sha256 = "02av2vvdffpcm0y7df3mi1jr76vpm6cj3cz3hjv4x172chxkzg2c";
       })
   ) { };
   rocksdb-haskell = hspkgs.callPackage (
     haskellPackageGen {} (fetchFromGitHub {
         owner = "serokell";
         repo = "rocksdb-haskell";
-        rev = "5c17f60dad1fd91d47f05cd8b02e859aa26a3547";
-        sha256 = "0bqh20bxv0wgcc4qijc08mq0nwpj4b8cb3l8f7wl4714970b2jj7";
+        rev = "cbe733d9bbdc61b07d9a6fd0bc7964ac1e78f6a5";
+        sha256 = "0hi5fda4h8q1jrdr6k0knxhzs08lhwc5a7achj0ys75snh7w5151";
       })
   ) { };
   kademlia = hspkgs.callPackage (
     haskellPackageGen { doCheck = false; } (fetchFromGitHub {
         owner = "serokell";
         repo = "kademlia";
-        rev = "278171b8ab104c78aa95bcdd9b63c8ced4fb1ed2";
-        sha256 = "0p23v8qlqrfvsiycdlacx8y3hksnrjfjln3wfqcnlrk8dz4fd5cv";
+        rev = "8ebc91484994fbd1b8383d42786ae40bb5c99042";
+        sha256 = "0wlfb79xr2z8pd8pkzyz806kbh385b7gcx1s9h3jg46mq4ffi1y7";
       })
   ) { };
   ed25519 = hspkgs.callPackage (
@@ -120,7 +128,7 @@ in rec {
       })
   ) { };
   time-warp = hspkgs.callPackage (
-    haskellPackageGen { profiling = true; } (fetchFromGitHub {
+    haskellPackageGen { profiling = false; } (fetchFromGitHub {
         owner = "serokell";
         repo = "time-warp";
         rev = "4d5c82fc05f5c01919980e28e64de3753e317546";
@@ -132,7 +140,7 @@ in rec {
   hspkgs = compiler.override {
     overrides = self: super: {
       inherit cardano-sl;
-      inherit universum acid-state log-warper kademlia plutus-prototype rocksdb-haskell ed25519 pvss serokell-util time-warp;
+      inherit universum acid-state log-warper kademlia plutus-prototype rocksdb-haskell ed25519 pvss serokell-util time-warp tw-rework-sketch network-transport-tcp;
       QuickCheck = super.QuickCheck_2_9_2;
       th-expand-syns = overrideAttrs super.th-expand-syns {
         version = "0.4.1.0";
@@ -147,7 +155,7 @@ in rec {
         sha256 = "09pfpll3hxx49cbr0a1h1pk5602sql2gcd4783j3n44z4nsgij23";
       };
       mkDerivation = args: super.mkDerivation (args // {
-        enableLibraryProfiling = true;
+        enableLibraryProfiling = false;
         # Remove after hspec-expectations-pretty-diff-0.7.2.4 tests fixed (nneded for purescript-bridge)
         doCheck = false;
       });

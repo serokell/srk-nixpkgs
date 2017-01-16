@@ -5,7 +5,6 @@
 , networkDiameter ? 6
 , mpcRelayInterval ? 16 } :
 
-with pkgs; 
 with (import <nixpkgs/pkgs/development/haskell-modules/lib.nix> { inherit pkgs;});
 
 let
@@ -32,15 +31,9 @@ let
              > $out
          '';
      in import package;
-  kademliaTW = fetchFromGitHub {
-    owner = "serokell";
-    repo = "kademlia";
-    rev = "8ebc91484994fbd1b8383d42786ae40bb5c99042";
-    sha256 = "0wlfb79xr2z8pd8pkzyz806kbh385b7gcx1s9h3jg46mq4ffi1y7";
-  };
 in rec {
   universum = hspkgs.callPackage (
-    haskellPackageGen {} (fetchFromGitHub {
+    haskellPackageGen {} (pkgs.fetchFromGitHub {
         owner = "serokell";
         repo = "universum";
         rev = "db3cd301545e5da000e53ca2cdf274e0386192bf";
@@ -48,7 +41,7 @@ in rec {
       })
   ) { };
   acid-state = hspkgs.callPackage (
-    haskellPackageGen {} (fetchFromGitHub {
+    haskellPackageGen {} (pkgs.fetchFromGitHub {
         owner = "serokell";
         repo = "acid-state";
         rev = "95fce1dbada62020a0b2d6aa2dd7e88eadd7214b";
@@ -56,7 +49,7 @@ in rec {
       })
   ) { };
   log-warper = hspkgs.callPackage (
-    haskellPackageGen {} (fetchFromGitHub {
+    haskellPackageGen {} (pkgs.fetchFromGitHub {
         owner = "serokell";
         repo = "log-warper";
         rev = "e05d74587ff9270891a3e57f1f15d9e91c8d2c83";
@@ -64,23 +57,23 @@ in rec {
       })
   ) { };
   network-transport-tcp = hspkgs.callPackage (
-    haskellPackageGen {} (fetchFromGitHub {
+    haskellPackageGen {} (pkgs.fetchFromGitHub {
         owner = "serokell";
         repo = "network-transport-tcp";
         rev = "586c9bf830252476522cab6274ef8ddc32615686";
         sha256 = "04q73wpi5kzqr4fk1zm5bgayljjc62qi34yls59zwv73k745dwzp";
       })
   ) { };
-  tw-rework-sketch = hspkgs.callPackage (
-    haskellPackageGen {} (fetchFromGitHub {
+  node-sketch = hspkgs.callPackage (
+    haskellPackageGen {} (pkgs.fetchFromGitHub {
         owner = "serokell";
         repo = "tw-rework-sketch";
-        rev = "8d4773a6a03b9b1d676115ba4bf6a5021bc184c9";
-        sha256 = "0ny0pmkbcinfizbf9q3vlvpscq10h59b492rnf0xmsyh5fy11aw7";
+        rev = "79d2efba3309ace63d03aaa4517df0c1a3cd22ba";
+        sha256 = "0am8rxis3h2kr8b95qw83fzihmnyfmf44wfh94591n1s59lnygks";
       })
   ) { };
   plutus-prototype = hspkgs.callPackage (
-    haskellPackageGen {} (fetchFromGitHub {
+    haskellPackageGen {} (pkgs.fetchFromGitHub {
         owner = "input-output-hk";
         repo = "plutus-prototype";
         rev = "62b4aaf5e8dfe70a7734a555032d8461ce4a812a";
@@ -88,7 +81,7 @@ in rec {
       })
   ) { };
   rocksdb-haskell = hspkgs.callPackage (
-    haskellPackageGen {} (fetchFromGitHub {
+    haskellPackageGen {} (pkgs.fetchFromGitHub {
         owner = "serokell";
         repo = "rocksdb-haskell";
         rev = "cbe733d9bbdc61b07d9a6fd0bc7964ac1e78f6a5";
@@ -96,7 +89,7 @@ in rec {
       })
   ) { };
   kademlia = hspkgs.callPackage (
-    haskellPackageGen { doCheck = false; } (fetchFromGitHub {
+    haskellPackageGen { doCheck = false; } (pkgs.fetchFromGitHub {
         owner = "serokell";
         repo = "kademlia";
         rev = "8ebc91484994fbd1b8383d42786ae40bb5c99042";
@@ -104,7 +97,7 @@ in rec {
       })
   ) { };
   ed25519 = hspkgs.callPackage (
-    haskellPackageGen {} (fetchFromGitHub {
+    haskellPackageGen {} (pkgs.fetchFromGitHub {
         owner = "domenkozar";
         repo = "hs-ed25519";
         rev = "96e5db162d88482bc0e120dc61cadd45c168c275";
@@ -112,7 +105,7 @@ in rec {
       })
   ) { };
   pvss = hspkgs.callPackage (
-    haskellPackageGen { doCheck = false; } (fetchFromGitHub {
+    haskellPackageGen { doCheck = false; } (pkgs.fetchFromGitHub {
         owner = "input-output-hk";
         repo = "pvss-haskell";
         rev = "42751055d1794627ac53b6404373dfc7b44a8366";
@@ -120,7 +113,7 @@ in rec {
       })
   ) { };
   serokell-util = hspkgs.callPackage (
-    haskellPackageGen {} (fetchFromGitHub {
+    haskellPackageGen {} (pkgs.fetchFromGitHub {
         owner = "serokell";
         repo = "serokell-util";
         rev = "c37625cc4daaa6b312e53d47200ded78cbbd0659";
@@ -128,20 +121,44 @@ in rec {
       })
   ) { };
   time-warp = hspkgs.callPackage (
-    haskellPackageGen { profiling = false; } (fetchFromGitHub {
+    haskellPackageGen { } (pkgs.fetchFromGitHub {
         owner = "serokell";
         repo = "time-warp";
         rev = "4d5c82fc05f5c01919980e28e64de3753e317546";
         sha256 = "18ijrb3ghjw17r7ng34r5w2acbni010x13p199lmz25vrpsilqzb";
       })
   ) { };
-  cardano-sl = hspkgs.callPackage ./cardano-sl.nix { inherit genesisN slotDuration networkDiameter mpcRelayInterval; };
+  cardano-sl = hspkgs.callPackage (
+    haskellPackageGen { } (pkgs.fetchFromGitHub {
+        owner = "input-output-hk";
+        repo = "cardano-sl";
+        rev = "7054661a7ddfc18ca9fd63ae996e73799abfee07";
+        sha256 = "1r04mqbny4556j9p85s1rhwdyyraw1alx5ifiw2rm6dng47ik8i9";
+      })
+  ) { rocksdb = rocksdb-haskell; };
   
   hspkgs = compiler.override {
     overrides = self: super: {
-      inherit cardano-sl;
-      inherit universum acid-state log-warper kademlia plutus-prototype rocksdb-haskell ed25519 pvss serokell-util time-warp tw-rework-sketch network-transport-tcp;
+      inherit universum acid-state log-warper kademlia plutus-prototype ed25519 pvss serokell-util time-warp node-sketch network-transport-tcp;
       QuickCheck = super.QuickCheck_2_9_2;
+      cardano-sl = overrideCabal cardano-sl (drv: {
+        # Build statically to reduce closure size
+        enableSharedLibraries = false;
+        enableSharedExecutables = false;
+        isLibrary = false;
+        patchPhase = ''
+         export CSL_SYSTEM_TAG=linux64
+        '';
+        # production full nodes shouldn't use wallet as it means different constants
+        configureFlags = [ "-f-asserts" "-f-with-wallet" "-f-with-web" "-f-dev-mode"];
+        # speed up production build
+        doHaddock = false;
+        doCheck = false;
+        postFixup = ''
+          echo "Removing $out/lib to spare HDD space for deployments"
+          rm -rf $out/lib
+        '';
+      });
       th-expand-syns = overrideAttrs super.th-expand-syns {
         version = "0.4.1.0";
         sha256 = "1sj8psxnmjsxrfan2ryx8w40xlgc1p51m7r0jzd49mjwrj9gb661";
@@ -163,4 +180,3 @@ in rec {
   };
 
 }
-
